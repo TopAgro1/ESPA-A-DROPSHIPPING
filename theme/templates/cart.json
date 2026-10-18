@@ -1,0 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * Plantilla generada para el tema Dermarel PDP.
+ * Puedes editarla desde Tienda online > Temas > Personalizar.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

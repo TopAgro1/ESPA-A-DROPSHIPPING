@@ -1,0 +1,24 @@
+<div class="modal" id="LightboxModal" data-modal aria-hidden="true">
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__dialog modal__dialog--media" role="dialog" aria-modal="true" aria-label="{{ 'general.media_viewer' | t }}" tabindex="-1">
+    <button type="button" class="modal__close icon-btn" data-modal-close aria-label="{{ 'general.close' | t }}">
+      {%- render 'icon', icon: 'close' -%}
+    </button>
+    <div class="modal__content" data-modal-content></div>
+  </div>
+</div>
+
+<div class="modal modal--search" id="SearchModal" data-modal aria-hidden="true">
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__dialog modal__dialog--search" role="dialog" aria-modal="true" aria-label="{{ 'general.search' | t }}" tabindex="-1">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <label class="visually-hidden" for="SearchModalInput">{{ 'general.search' | t }}</label>
+      {%- render 'icon', icon: 'search' -%}
+      <input id="SearchModalInput" type="search" name="q" placeholder="{{ 'general.search_placeholder' | t }}" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="button" class="icon-btn" data-modal-close aria-label="{{ 'general.close' | t }}">
+        {%- render 'icon', icon: 'close' -%}
+      </button>
+    </form>
+  </div>
+</div>

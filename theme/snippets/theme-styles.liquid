@@ -1,0 +1,45 @@
+{%- comment -%}
+  Fuentes y variables de diseño globales (tokens extraídos del diseño Dermarel).
+{%- endcomment -%}
+{%- liquid
+  assign heading_font = settings.type_heading_font | default: 'Space Grotesk'
+  assign body_font = settings.type_body_font | default: 'Space Grotesk'
+  assign font_stack = "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+-%}
+{%- if settings.load_google_fonts -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family={{ heading_font | replace: ' ', '+' }}:wght@400;500;600;700{% if body_font != heading_font %}&family={{ body_font | replace: ' ', '+' }}:wght@400;500;600;700{% endif %}&display=swap"
+  >
+{%- endif -%}
+
+{% style %}
+  :root {
+    --color-bg: {{ settings.color_background }};
+    --color-text: {{ settings.color_text }};
+    --color-text-rgb: {{ settings.color_text.red }}, {{ settings.color_text.green }}, {{ settings.color_text.blue }};
+    --color-heading: {{ settings.color_heading }};
+    --color-border: {{ settings.color_border }};
+    --color-primary: {{ settings.color_primary }};
+    --color-primary-rgb: {{ settings.color_primary.red }}, {{ settings.color_primary.green }}, {{ settings.color_primary.blue }};
+    --color-primary-text: {{ settings.color_primary_text }};
+    --color-dark: {{ settings.color_dark }};
+    --color-accent: {{ settings.color_accent }};
+    --color-soft: {{ settings.color_soft }};
+    --color-stars: {{ settings.color_stars }};
+    --color-sale: {{ settings.color_sale }};
+
+    --font-heading: '{{ heading_font }}', {{ font_stack }};
+    --font-body: '{{ body_font }}', {{ font_stack }};
+    --heading-weight: {{ settings.heading_weight | default: '500' }};
+    --body-size: {{ settings.body_size | default: 15 }}px;
+
+    --page-width: {{ settings.page_width | default: 1300 }}px;
+    --radius: {{ settings.radius }}px;
+    --radius-block: {{ settings.radius_block }}px;
+    --button-shadow: {% if settings.button_shadow %}0 8px 18px -6px rgba({{ settings.color_primary.red }}, {{ settings.color_primary.green }}, {{ settings.color_primary.blue }}, 0.55){% else %}none{% endif %};
+    --card-blend: {% if settings.card_image_blend %}multiply{% else %}normal{% endif %};
+  }
+{% endstyle %}

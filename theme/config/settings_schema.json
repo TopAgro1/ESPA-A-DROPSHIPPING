@@ -1,0 +1,330 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Dermarel PDP",
+    "theme_version": "1.0.0",
+    "theme_author": "TopAgro1",
+    "theme_documentation_url": "https://github.com/TopAgro1/ESPA-A-DROPSHIPPING",
+    "theme_support_url": "https://github.com/TopAgro1/ESPA-A-DROPSHIPPING/issues"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo (imagen)",
+        "info": "Si lo dejas vacío se usa el nombre de la tienda con el símbolo del diseño."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 60,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Ancho del logo",
+        "default": 150
+      },
+      {
+        "type": "checkbox",
+        "id": "show_logo_mark",
+        "label": "Mostrar símbolo junto al nombre (logo de texto)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_logo_tm",
+        "label": "Mostrar ™ junto al nombre (logo de texto)",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 × 32 px recomendado."
+      }
+    ]
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Base"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fondo",
+        "default": "#FEF9E4"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texto",
+        "default": "#2E3024"
+      },
+      {
+        "type": "color",
+        "id": "color_heading",
+        "label": "Titulares de sección",
+        "default": "#6C7140"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Bordes y separadores",
+        "default": "#E3DFC4"
+      },
+      {
+        "type": "header",
+        "content": "Marca"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Principal (botones, bloque de ingredientes)",
+        "default": "#6C7140"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_text",
+        "label": "Texto sobre color principal",
+        "default": "#FEF9E4"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Oscuro (pie de página)",
+        "default": "#383A2E"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Acento (círculo, etiquetas, puntos)",
+        "default": "#ECF489"
+      },
+      {
+        "type": "color",
+        "id": "color_soft",
+        "label": "Fondo de iconos de cabecera",
+        "default": "#E8E4CE"
+      },
+      {
+        "type": "color",
+        "id": "color_stars",
+        "label": "Estrellas",
+        "default": "#EDB15A"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Precio anterior y ahorro",
+        "default": "#2E3024"
+      }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      {
+        "type": "select",
+        "id": "type_heading_font",
+        "label": "Fuente de titulares",
+        "default": "Space Grotesk",
+        "options": [
+          { "value": "Space Grotesk", "label": "Space Grotesk (diseño)" },
+          { "value": "Schibsted Grotesk", "label": "Schibsted Grotesk" },
+          { "value": "Hanken Grotesk", "label": "Hanken Grotesk" },
+          { "value": "Bricolage Grotesque", "label": "Bricolage Grotesque" },
+          { "value": "Manrope", "label": "Manrope" },
+          { "value": "DM Sans", "label": "DM Sans" },
+          { "value": "Outfit", "label": "Outfit" },
+          { "value": "Plus Jakarta Sans", "label": "Plus Jakarta Sans" },
+          { "value": "Sora", "label": "Sora" },
+          { "value": "Poppins", "label": "Poppins" },
+          { "value": "Inter", "label": "Inter" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "type_body_font",
+        "label": "Fuente de textos",
+        "default": "Space Grotesk",
+        "options": [
+          { "value": "Space Grotesk", "label": "Space Grotesk (diseño)" },
+          { "value": "Schibsted Grotesk", "label": "Schibsted Grotesk" },
+          { "value": "Hanken Grotesk", "label": "Hanken Grotesk" },
+          { "value": "Bricolage Grotesque", "label": "Bricolage Grotesque" },
+          { "value": "Manrope", "label": "Manrope" },
+          { "value": "DM Sans", "label": "DM Sans" },
+          { "value": "Outfit", "label": "Outfit" },
+          { "value": "Plus Jakarta Sans", "label": "Plus Jakarta Sans" },
+          { "value": "Sora", "label": "Sora" },
+          { "value": "Poppins", "label": "Poppins" },
+          { "value": "Inter", "label": "Inter" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "heading_weight",
+        "label": "Grosor de titulares",
+        "default": "500",
+        "options": [
+          { "value": "400", "label": "Normal" },
+          { "value": "500", "label": "Medio (diseño)" },
+          { "value": "600", "label": "Semi negrita" },
+          { "value": "700", "label": "Negrita" }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "body_size",
+        "min": 13,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "label": "Tamaño base del texto",
+        "default": 15
+      },
+      {
+        "type": "checkbox",
+        "id": "type_capitalize",
+        "label": "Mayúscula en cada palabra",
+        "info": "Estilo del diseño original (\"Repara La Barrera En 7 Días\"). No afecta a descripciones ni a textos legales.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "load_google_fonts",
+        "label": "Cargar fuentes desde Google Fonts",
+        "info": "Si lo desactivas se usan las fuentes del sistema (más rápido, sin conexión a Google).",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Diseño",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1000,
+        "max": 1600,
+        "step": 10,
+        "unit": "px",
+        "label": "Ancho máximo del contenido",
+        "default": 1300
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "label": "Redondeo de imágenes y tarjetas",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "radius_block",
+        "min": 0,
+        "max": 48,
+        "step": 2,
+        "unit": "px",
+        "label": "Redondeo de bloques a ancho completo",
+        "default": 24
+      },
+      {
+        "type": "checkbox",
+        "id": "button_shadow",
+        "label": "Sombra suave en botones principales",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_image_blend",
+        "label": "Fundir el fondo blanco de las fotos de producto en las tarjetas",
+        "info": "Útil con fotos de proveedor con fondo blanco: se integran con el fondo crema.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "animations",
+        "label": "Animación suave al hacer scroll",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Carrito",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Al añadir al carrito",
+        "default": "drawer",
+        "options": [
+          { "value": "drawer", "label": "Abrir carrito lateral" },
+          { "value": "page", "label": "Ir a la página del carrito" }
+        ]
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Umbral de envío gratis (en la moneda de la tienda)",
+        "info": "Muestra una barra de progreso en el carrito. Pon 0 para ocultarla. Debe coincidir con tus tarifas de envío reales.",
+        "default": 0
+      },
+      {
+        "type": "text",
+        "id": "cart_guarantee",
+        "label": "Texto de garantía bajo el botón de pago",
+        "default": "Garantía de 30 días sin riesgo · Pago 100 % seguro"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment_icons",
+        "label": "Mostrar métodos de pago en el carrito",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook",
+        "info": "https://facebook.com/tu-marca"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@tu-marca"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "info": "https://instagram.com/tu-marca"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/tu-marca"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube",
+        "info": "https://youtube.com/@tu-marca"
+      }
+    ]
+  }
+]

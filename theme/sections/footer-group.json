@@ -1,0 +1,30 @@
+{
+  "type": "footer",
+  "name": "Grupo de pie de página",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu_quick": {
+          "type": "menu",
+          "settings": { "heading": "Enlaces rápidos", "menu": "main-menu" }
+        },
+        "menu_solutions": {
+          "type": "menu",
+          "settings": { "heading": "Nuestras soluciones" }
+        },
+        "menu_explore": {
+          "type": "menu",
+          "settings": { "heading": "Explora", "menu": "footer" }
+        }
+      },
+      "block_order": ["menu_quick", "menu_solutions", "menu_explore"],
+      "settings": {
+        "heading": "Habla con alguien que entiende la piel sensible",
+        "show_form": true,
+        "button_label": "Enviar mensaje"
+      }
+    }
+  },
+  "order": ["footer"]
+}

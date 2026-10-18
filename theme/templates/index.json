@@ -1,0 +1,529 @@
+/*
+ * ------------------------------------------------------------
+ * Plantilla generada para el tema Dermarel PDP.
+ * Puedes editarla desde Tienda online > Temas > Personalizar.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "rating": "4.8",
+            "label": "Avalado por +2.300 clientes",
+            "use_metafields": true,
+            "link_to_reviews": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "subtitle": {
+          "type": "subtitle",
+          "settings": {
+            "text": "Repara la barrera dañada en 7 días"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "compare_no_currency": true,
+            "show_badge": false,
+            "show_tax_note": false
+          }
+        },
+        "benefits": {
+          "type": "benefits",
+          "settings": {
+            "heading": "Para piel sensible, sobreexfoliada o reactiva",
+            "benefit_1": "Rojeces visiblemente más calmadas en días",
+            "benefit_2": "Piel resistente, no reactiva",
+            "benefit_3": "Cero fragancia, cero irritación"
+          }
+        },
+        "variants": {
+          "type": "variant_picker",
+          "settings": {
+            "style": "pills"
+          }
+        },
+        "packs": {
+          "type": "packs",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": true,
+            "atc_label": "Añadir al carrito",
+            "show_buy_now": true,
+            "buy_now_label": "Comprar ahora",
+            "buy_now_show_price": true,
+            "buy_now_discount": 0,
+            "buy_now_discount_code": "",
+            "guarantee": "Garantía de 30 días sin riesgo."
+          }
+        },
+        "shipping": {
+          "type": "shipping_info",
+          "disabled": true,
+          "settings": {}
+        },
+        "ugc": {
+          "type": "ugc",
+          "settings": {
+            "heading": "Opiniones reales de clientes"
+          }
+        },
+        "tab_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Modo de uso",
+            "source": "custom",
+            "open": false,
+            "content": "<p>Aplica 2-3 gotas sobre la piel limpia y ligeramente húmeda, mañana y noche. Presiona con las palmas hasta que se absorba, sin frotar. Por la mañana, termina con tu protector solar.</p>"
+          }
+        },
+        "tab_ingredients": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredientes",
+            "source": "custom",
+            "open": false,
+            "content": "<p>Agua, glicerina, escualano, niacinamida, ceramidas, pantenol y extracto de centella asiática.</p><p>Sin fragancia, sin alcohol secante y sin aceites esenciales.</p>"
+          }
+        },
+        "tab_certified": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Certificaciones",
+            "source": "custom",
+            "open": false,
+            "content": "<ul><li>Testado dermatológicamente</li><li>Vegano y cruelty-free</li><li>Fabricado en la UE conforme al Reglamento (CE) 1223/2009</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "rating",
+        "title",
+        "subtitle",
+        "price",
+        "benefits",
+        "variants",
+        "packs",
+        "buy",
+        "shipping",
+        "ugc",
+        "tab_use",
+        "tab_ingredients",
+        "tab_certified"
+      ],
+      "settings": {
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "enable_zoom": true,
+        "sticky_atc": "mobile",
+        "sticky_before": true,
+        "sticky_label": "Comprar ahora"
+      }
+    },
+    "problem": {
+      "type": "problem-cards",
+      "disabled": true,
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Qué pasa",
+            "text": "Rojeces, tirantez y escozor después de casi cualquier crema, incluso las que dicen ser para piel sensible."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Por qué importa",
+            "text": "Una barrera dañada pierde agua y deja pasar irritantes: cuantos más productos pruebas, más reacciona."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Por qué no lo has resuelto",
+            "text": "Rutinas de 7 pasos, fragancias ocultas y activos agresivos. Lo que no es cómodo no se vuelve rutina."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "eyebrow": "Por qué tu piel reacciona",
+        "heading": "No es que tu piel sea difícil",
+        "text": "<p>Cuando la barrera cutánea está dañada, hasta los productos \"suaves\" pican. No te falta constancia: te sobran ingredientes que no necesitas.</p>"
+      }
+    },
+    "spotlight": {
+      "type": "testimonial-spotlight",
+      "blocks": {
+        "quote_1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Emily R.",
+            "quote": "He probado muchísimos productos \"suaves\" que aun así me irritaban la piel. Esta rutina se sintió diferente desde la primera semana: sin ardor, sin tirantez, solo una piel calmada y cómoda. Mis rojeces se han reducido notablemente y por fin me siento segura.",
+            "rating": 5
+          }
+        },
+        "quote_2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Jessica M.",
+            "quote": "Tengo la piel reactiva desde siempre y casi todo me pica. Con este sérum la noto calmada desde el primer día, sin rojeces después de lavarme la cara. Es el único producto que no he dejado de usar.",
+            "rating": 5
+          }
+        },
+        "quote_3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michael T.",
+            "quote": "Me afeito a diario y la irritación era constante. Ahora la piel aguanta mucho mejor: sin escozor, sin granitos y sin esa sensación de tirantez. Ligero, se absorbe rápido y no deja brillo.",
+            "rating": 5
+          }
+        },
+        "quote_4": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sarah L.",
+            "quote": "Me había pasado con los exfoliantes y tenía la barrera destrozada. En una semana la piel dejó de arder y en un mes vuelvo a poder maquillarme sin molestias. Lo recomiendo a cualquiera con piel sensible.",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2",
+        "quote_3",
+        "quote_4"
+      ],
+      "settings": {
+        "heading": "Tan suave que confías en él cada día",
+        "circle_color": "#ECF489",
+        "crop_circle": true,
+        "autoplay": 0
+      }
+    },
+    "ingredients": {
+      "type": "ingredients-callouts",
+      "blocks": {
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "label": "Humectantes idénticos a la piel",
+            "x": 9,
+            "y": 24,
+            "align": "right",
+            "line": 26,
+            "angle": 45
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "label": "Activos calmantes suaves",
+            "x": 73,
+            "y": 24,
+            "align": "right",
+            "line": 22,
+            "angle": 140
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "label": "Lípidos reparadores de la barrera",
+            "x": 1,
+            "y": 60,
+            "align": "right",
+            "line": 26,
+            "angle": 15
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "label": "Conservantes no irritantes",
+            "x": 75,
+            "y": 64,
+            "align": "right",
+            "line": 24,
+            "angle": 195
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "label": "Fórmula sin fragancia",
+            "x": 40,
+            "y": 90,
+            "align": "right",
+            "line": 30,
+            "angle": 285
+          }
+        }
+      },
+      "block_order": [
+        "callout_1",
+        "callout_2",
+        "callout_3",
+        "callout_4",
+        "callout_5"
+      ],
+      "settings": {
+        "heading": "Nada aquí que irrite tu piel",
+        "text": "<p>Solo ingredientes que apoyan la barrera, seleccionados para la tolerancia diaria. Cada ingrediente se elige para calmar, proteger y ayudar a la recuperación.</p>",
+        "background": "#6C7140",
+        "text_color": "#FEF9E4",
+        "dot_color": "#ECF489",
+        "show_splash": true,
+        "splash_color": "#8E9463"
+      }
+    },
+    "routine": {
+      "type": "routine-steps",
+      "disabled": true,
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Limpia",
+            "text": "Lava el rostro con agua tibia y un limpiador suave. Seca a toquecitos."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Aplica",
+            "text": "2-3 gotas sobre la piel aún húmeda. Presiona con las palmas, sin frotar."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Protege",
+            "text": "Por la mañana, termina con tu protector solar. Por la noche, listo."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "heading": "Tu rutina en 3 pasos"
+      }
+    },
+    "recommended": {
+      "type": "recommended-products",
+      "blocks": {
+        "card_1": {
+          "type": "product",
+          "settings": {
+            "title": "Sérum post-afeitado",
+            "badge": "Para hombre",
+            "description": "Calma la irritación y reduce las rojeces.",
+            "rating": "4.8",
+            "reviews_count": "1.040"
+          }
+        },
+        "card_2": {
+          "type": "product",
+          "settings": {
+            "title": "Crema reparadora de noche",
+            "badge": "Para hombre",
+            "description": "Repara e hidrata mientras duermes.",
+            "rating": "4.8",
+            "reviews_count": "1.590"
+          }
+        },
+        "card_3": {
+          "type": "product",
+          "settings": {
+            "title": "Sérum calmante",
+            "badge": "Para mujer",
+            "description": "Calma las rojeces de la piel reactiva.",
+            "rating": "4.8",
+            "reviews_count": "1.040"
+          }
+        },
+        "card_4": {
+          "type": "product",
+          "settings": {
+            "title": "Protector barrera SPF",
+            "badge": "Para mujer",
+            "description": "Protección UV diaria para piel sensible.",
+            "rating": "4.5",
+            "reviews_count": "890"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "Recomendado para ti",
+        "columns": 4
+      }
+    },
+    "reviews": {
+      "type": "reviews-wall",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "name": "Jason M.",
+            "verified": true,
+            "rating": 5,
+            "date": "10/01/26",
+            "text": "Este sérum se absorbe al instante y nunca se siente pesado ni pegajoso. Noté la piel más suave, más hidratada y menos irritada tras pocos usos. Las rojeces y las zonas secas se han reducido muchísimo."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "name": "Daniel R.",
+            "verified": true,
+            "rating": 5,
+            "date": "17/01/26",
+            "text": "Después de una semana usando esta crema, noto la piel más lisa, calmada y cómoda. Es ligera, se absorbe rápido y no deja residuo graso. También veo el tono más uniforme y fresco."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "name": "Mark T.",
+            "verified": true,
+            "rating": 5,
+            "date": "15/01/26",
+            "text": "Me ayuda de verdad a calmar la piel después del afeitado y reduce la irritación y la sequedad. Noto la piel más fuerte y equilibrada todo el día. Ligero, nada graso y perfecto para el uso diario."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "name": "Chris L.",
+            "verified": true,
+            "rating": 5,
+            "date": "13/01/26",
+            "text": "Sencillo, eficaz y fácil de usar cada día. La piel se nota hidratada, suave y más resistente a la sequedad. Se absorbe rápido sin sensación pesada ni brillos. La veo más sana y equilibrada."
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "name": "Andrew K.",
+            "verified": true,
+            "rating": 5,
+            "date": "12/01/26",
+            "text": "Textura genial, absorción rápida y una sensación fantástica en la piel. Se mantiene hidratada todo el día y se ve más fuerte y uniforme. Menos rojeces y sequedad, y va genial debajo del protector solar."
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "name": "Allison S.",
+            "verified": true,
+            "rating": 5,
+            "date": "10/01/26",
+            "text": "He probado muchos productos de skincare, pero este destaca. Noto la piel más suave, hidratada y cómoda durante todo el día. Las rojeces y la irritación se han reducido notablemente. Se absorbe rápido y no engrasa."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ],
+      "settings": {
+        "heading": "+2.300 clientes confían en nosotros",
+        "show_summary": true,
+        "count_5": 2348,
+        "count_4": 180,
+        "count_3": 68,
+        "count_2": 29,
+        "count_1": 18,
+        "show_write_button": true,
+        "write_label": "Escribir una reseña",
+        "show_static_reviews": true,
+        "per_page": 6,
+        "load_more_label": "Cargar más"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "disabled": true,
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "¿En cuánto tiempo se nota?",
+            "answer": "<p>La mayoría de clientes nota la piel más cómoda en la primera semana de uso constante.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Sirve para piel muy sensible o con rosácea?",
+            "answer": "<p>Está formulado sin fragancia ni alcohol. Si tienes una afección diagnosticada, consulta con tu dermatólogo antes de usarlo.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto tarda el envío?",
+            "answer": "<p>Preparamos tu pedido en 24-48 h. La entrega en península tarda de 3 a 6 días laborables.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Y si no me funciona?",
+            "answer": "<p>Tienes 30 días de garantía. Escríbenos y te devolvemos el dinero.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4"
+      ],
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "text": "<p>¿Tienes otra duda? Escríbenos desde el formulario de abajo y te respondemos en menos de 24 h.</p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "problem",
+    "spotlight",
+    "ingredients",
+    "routine",
+    "recommended",
+    "reviews",
+    "faq"
+  ]
+}

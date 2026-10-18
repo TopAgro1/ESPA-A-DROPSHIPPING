@@ -1,0 +1,30 @@
+{%- comment -%}
+  Precio con precio anterior tachado.
+  - product / variant
+  - compare_no_currency: true para mostrar el precio anterior sin símbolo (como en el diseño)
+  - show_badge: muestra "-X %"
+  - class: clase extra
+{%- endcomment -%}
+{%- liquid
+  assign price_target = variant | default: product.selected_or_first_available_variant
+  assign price_value = price_target.price | default: product.price | default: 0
+  assign compare_value = price_target.compare_at_price | default: 0
+  assign on_sale = false
+  if compare_value > price_value
+    assign on_sale = true
+    assign save_pct = compare_value | minus: price_value | times: 100.0 | divided_by: compare_value | round
+  endif
+-%}
+<div class="price{% if on_sale %} price--sale{% endif %}{% if class %} {{ class }}{% endif %}" data-price-wrap>
+  <span class="price__current" data-price>{{ price_value | money }}</span>
+  <s class="price__compare" data-compare-price{% if compare_no_currency %} data-no-currency{% endif %}{% unless on_sale %} hidden{% endunless %}>
+    {%- if on_sale -%}
+      {%- if compare_no_currency -%}{{ compare_value | money_without_currency }}{%- else -%}{{ compare_value | money }}{%- endif -%}
+    {%- endif -%}
+  </s>
+  {%- if show_badge -%}
+    <span class="price__badge" data-save-badge{% unless on_sale %} hidden{% endunless %}>
+      {%- if on_sale -%}{{ 'products.save_percent' | t: percent: save_pct }}{%- endif -%}
+    </span>
+  {%- endif -%}
+</div>

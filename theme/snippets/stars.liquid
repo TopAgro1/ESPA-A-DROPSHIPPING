@@ -1,0 +1,30 @@
+{%- comment -%}
+  Estrellas con relleno proporcional a la nota (ej. 4.6 → 92 %).
+  - rating: número de 0 a 5
+  - size: 'sm' | 'md' | 'lg'
+  - outline: true para dibujar las estrellas vacías con contorno
+{%- endcomment -%}
+{%- liquid
+  assign stars_value = rating | default: 5 | times: 1.0
+  if stars_value > 5
+    assign stars_value = 5
+  endif
+  assign stars_pct = stars_value | divided_by: 5.0 | times: 100 | round: 1
+-%}
+<span
+  class="stars stars--{{ size | default: 'sm' }}{% if outline %} stars--outline{% endif %}"
+  style="--rating: {{ stars_pct }}%;"
+  role="img"
+  aria-label="{{ 'reviews.rating_aria' | t: rating: stars_value }}"
+>
+  <span class="stars__row stars__row--empty" aria-hidden="true">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 24 24" focusable="false"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>
+    {%- endfor -%}
+  </span>
+  <span class="stars__row stars__row--fill" aria-hidden="true">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 24 24" focusable="false"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>
+    {%- endfor -%}
+  </span>
+</span>

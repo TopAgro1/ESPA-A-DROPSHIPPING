@@ -1,0 +1,58 @@
+<section class="cart-page section-pt">
+  <div class="page-width page-width--narrow">
+    <h1 class="h-section">{{ 'cart.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-page__form">
+        <ul class="cart-items cart-items--page" role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-item">
+              <a href="{{ item.url }}" class="cart-item__media">
+                {%- if item.image -%}{{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: item.product.title }}{%- endif -%}
+              </a>
+              <div class="cart-item__info">
+                <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}<p class="cart-item__variant">{{ item.variant.title }}</p>{%- endunless -%}
+                <div class="cart-item__row">
+                  <label class="visually-hidden" for="Updates-{{ item.key }}">{{ 'products.quantity' | t }}</label>
+                  <input class="field__input field__input--qty" id="Updates-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                  <div class="cart-item__price"><span>{{ item.final_line_price | money }}</span></div>
+                </div>
+                <a href="{{ item.url_to_remove }}" class="cart-item__remove">{{ 'cart.remove' | t }}</a>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.show_note -%}
+          <div class="field">
+            <label class="field__label" for="CartNote">{{ 'cart.note' | t }}</label>
+            <textarea class="field__input" id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        <div class="cart-page__foot">
+          <p class="cart-drawer__line cart-drawer__subtotal"><span>{{ 'cart.subtotal' | t }}</span><span>{{ cart.total_price | money }}</span></p>
+          <p class="cart-drawer__note">{%- if cart.taxes_included -%}{{ 'cart.taxes_included' | t }}{%- else -%}{{ 'cart.taxes_excluded' | t }}{%- endif -%}</p>
+          <div class="cart-page__actions">
+            <button type="submit" name="update" class="btn btn--outline">{{ 'cart.update' | t }}</button>
+            <button type="submit" name="checkout" class="btn btn--primary">{{ 'cart.checkout' | t }}</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <p class="cart-empty__text">{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">{{ 'cart.continue' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrito",
+  "tag": "div",
+  "class": "section-main-cart",
+  "settings": [
+    { "type": "checkbox", "id": "show_note", "label": "Permitir nota del pedido", "default": false }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+{%- comment -%}
+  Tarjeta de producto ("Recomendado para ti" y colecciones).
+  - product: objeto producto (opcional; sin producto se muestra un marcador)
+  - title, badge, description, rating, reviews_count: textos opcionales
+  - placeholder_index: 1-6 para variar la imagen de ejemplo
+{%- endcomment -%}
+{%- liquid
+  assign card_title = title | default: product.title | default: 'Producto de ejemplo'
+  assign card_rating = rating
+  assign card_count = reviews_count
+  if card_rating == blank and product.metafields.reviews.rating.value != blank
+    assign card_rating = product.metafields.reviews.rating.value.rating | round: 1
+    assign card_count = product.metafields.reviews.rating_count.value
+  endif
+  assign card_index = placeholder_index | default: 1 | modulo: 6 | plus: 1
+  if product != blank
+    assign card_tag = 'a'
+  else
+    assign card_tag = 'div'
+  endif
+-%}
+<{{ card_tag }} class="card reveal"{% if product != blank %} href="{{ product.url }}"{% endif %}>
+  {%- if badge != blank -%}
+    <span class="card__badge">{{ badge }}</span>
+  {%- endif -%}
+  <div class="card__media">
+    {%- if product.featured_media != blank -%}
+      {{
+        product.featured_media
+        | image_url: width: 700
+        | image_tag:
+          loading: 'lazy',
+          widths: '240, 360, 480, 700',
+          sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 60vw',
+          alt: product.featured_media.alt | default: card_title
+      }}
+    {%- else -%}
+      {{ 'product-' | append: card_index | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+  <div class="card__body">
+    <h3 class="card__title">{{ card_title }}</h3>
+    {%- if description != blank -%}
+      <p class="card__desc">{{ description }}</p>
+    {%- endif -%}
+    <div class="card__meta">
+      {%- if card_rating != blank -%}
+        <span class="card__rating">
+          {%- render 'icon', icon: 'star' -%}
+          {{ card_rating }}
+          {%- if card_count != blank %} ({{ 'products.reviews_count' | t: count: card_count }}){% endif -%}
+        </span>
+      {%- endif -%}
+      {%- if product != blank -%}
+        <span class="card__price">
+          {%- if product.price_varies -%}
+            {%- assign card_min_price = product.price_min | money -%}
+            {{ 'products.from_price' | t: price: card_min_price }}
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+</{{ card_tag }}>

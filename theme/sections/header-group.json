@@ -1,0 +1,23 @@
+{
+  "type": "header",
+  "name": "Grupo de cabecera",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "settings": {
+        "text": "Envío gratis a partir de 39 € · Garantía de 30 días"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "show_search": true,
+        "show_account": true,
+        "sticky": false
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

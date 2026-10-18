@@ -1,0 +1,77 @@
+{%- comment -%}
+  Sección CRO opcional: preguntas frecuentes (resuelve objeciones) con datos estructurados FAQPage.
+{%- endcomment -%}
+<section id="Faq-{{ section.id }}" class="faq section-pt">
+  <div class="page-width faq__grid">
+    <div class="faq__head reveal">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h-section">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="faq__intro">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+    <div class="faq__list reveal">
+      {%- for block in section.blocks -%}
+        <details class="accordion accordion--lg" {{ block.shopify_attributes }}>
+          <summary class="accordion__summary">
+            <span>{{ block.settings.question }}</span>
+            {%- render 'icon', icon: 'chevron-down' -%}
+          </summary>
+          <div class="accordion__content rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in section.blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "tag": "div",
+  "class": "section-faq",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Preguntas frecuentes" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>¿Tienes otra duda? Escríbenos desde el formulario de abajo y te respondemos en menos de 24 h.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿En cuánto tiempo se nota?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>La mayoría de clientes nota la piel más cómoda en la primera semana de uso constante.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Preguntas frecuentes",
+      "blocks": [
+        { "type": "question", "settings": { "question": "¿En cuánto tiempo se nota?", "answer": "<p>La mayoría de clientes nota la piel más cómoda en la primera semana de uso constante.</p>" } },
+        { "type": "question", "settings": { "question": "¿Sirve para piel muy sensible o con rosácea?", "answer": "<p>Está formulado sin fragancia ni alcohol. Si tienes una afección diagnosticada, consulta con tu dermatólogo antes de usarlo.</p>" } },
+        { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Preparamos tu pedido en 24-48 h. La entrega en península tarda de 3 a 6 días laborables.</p>" } },
+        { "type": "question", "settings": { "question": "¿Y si no me funciona?", "answer": "<p>Tienes 30 días de garantía. Escríbenos y te devolvemos el dinero.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

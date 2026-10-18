@@ -1,0 +1,32 @@
+{%- comment -%}
+  Logo de la tienda.
+  - logo: imagen opcional (por defecto settings.logo)
+  - width: ancho en px
+  - variant: 'light' para fondos oscuros
+{%- endcomment -%}
+{%- liquid
+  assign logo_image = logo | default: settings.logo
+  assign logo_width = width | default: settings.logo_width
+-%}
+{%- if logo_image != blank -%}
+  {%- assign logo_height = logo_width | divided_by: logo_image.aspect_ratio | round -%}
+  {{
+    logo_image
+    | image_url: width: 600
+    | image_tag:
+      class: 'logo__image',
+      width: logo_width,
+      height: logo_height,
+      alt: shop.name,
+      loading: 'eager',
+      widths: '150, 300, 450, 600'
+  }}
+{%- else -%}
+  <span class="logo__text{% if variant == 'light' %} logo__text--light{% endif %}">
+    {%- if settings.show_logo_mark -%}
+      {%- render 'icon', icon: 'logo-mark', class: 'logo__mark' -%}
+    {%- endif -%}
+    <span class="logo__name">{{ shop.name | upcase }}</span>
+    {%- if settings.show_logo_tm -%}<sup class="logo__tm">TM</sup>{%- endif -%}
+  </span>
+{%- endif -%}

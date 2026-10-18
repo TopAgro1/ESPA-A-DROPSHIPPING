@@ -1,0 +1,36 @@
+<section class="blog section-pt">
+  <div class="page-width">
+    <h1 class="h-section">{{ blog.title }}</h1>
+    {%- paginate blog.articles by 9 -%}
+      <div class="recommended__grid recommended__grid--wrap" style="--cols: 3;">
+        {%- for article in blog.articles -%}
+          <a class="card card--article" href="{{ article.url }}">
+            <div class="card__media card__media--cover">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 33vw, 90vw', alt: article.title }}
+              {%- else -%}
+                {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="card__body">
+              <h2 class="card__title">{{ article.title }}</h2>
+              <p class="card__desc">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="{{ 'general.pagination' | t }}">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "div",
+  "class": "section-main-blog",
+  "settings": []
+}
+{% endschema %}

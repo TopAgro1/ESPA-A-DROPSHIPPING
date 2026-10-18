@@ -1,0 +1,178 @@
+{%- assign contact_form_id = 'FooterContact-' | append: section.id -%}
+<footer class="site-footer" style="--footer-bg: {{ section.settings.background }}; --footer-text: {{ section.settings.text_color }};">
+  <div class="bleed-card footer-card">
+    <div class="page-width">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="{{ routes.root_url }}" class="footer__logo" aria-label="{{ shop.name }}">
+            {%- render 'logo', logo: section.settings.logo, width: section.settings.logo_width, variant: 'light' -%}
+          </a>
+          {%- if section.settings.heading != blank -%}
+            <p class="footer__heading">{{ section.settings.heading }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.show_form -%}
+            {%- form 'contact', id: contact_form_id, class: 'footer-form' -%}
+              {%- if form.posted_successfully? -%}
+                <p class="form-success" role="status">{{ 'general.contact_success' | t }}</p>
+              {%- endif -%}
+              {{ form.errors | default_errors }}
+              <input type="hidden" name="contact[Tipo]" value="Consulta">
+              <label class="visually-hidden" for="{{ contact_form_id }}-name">{{ 'general.form_name' | t }}</label>
+              <input class="line-input" id="{{ contact_form_id }}-name" type="text" name="contact[name]" placeholder="{{ 'general.form_name' | t }}*" autocomplete="name" required>
+              <label class="visually-hidden" for="{{ contact_form_id }}-email">{{ 'general.form_email' | t }}</label>
+              <input class="line-input" id="{{ contact_form_id }}-email" type="email" name="contact[email]" placeholder="{{ 'general.form_email' | t }}*" autocomplete="email" required>
+              <label class="visually-hidden" for="{{ contact_form_id }}-body">{{ 'general.form_message' | t }}</label>
+              <input class="line-input" id="{{ contact_form_id }}-body" type="text" name="contact[body]" placeholder="{{ 'general.form_message' | t }}">
+              <button type="submit" class="btn btn--light">
+                {{ section.settings.button_label }}
+                {%- render 'icon', icon: 'arrow-right' -%}
+              </button>
+            {%- endform -%}
+          {%- endif -%}
+        </div>
+
+        <div class="footer__cols">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'menu' -%}
+                {%- if block.settings.menu.links.size > 0 -%}
+                  <div class="footer__col" {{ block.shopify_attributes }}>
+                    {%- if block.settings.heading != blank -%}
+                      <p class="footer__col-title">{{ block.settings.heading }}</p>
+                    {%- endif -%}
+                    <ul class="footer__links" role="list">
+                      {%- for link in block.settings.menu.links -%}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              {%- when 'text' -%}
+                <div class="footer__col" {{ block.shopify_attributes }}>
+                  {%- if block.settings.heading != blank -%}
+                    <p class="footer__col-title">{{ block.settings.heading }}</p>
+                  {%- endif -%}
+                  <div class="footer__text">{{ block.settings.text }}</div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <ul class="footer__social" role="list">
+          {%- if settings.social_facebook != blank -%}
+            <li><a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">{%- render 'icon', icon: 'facebook' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <li><a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{%- render 'icon', icon: 'tiktok' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <li><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{%- render 'icon', icon: 'instagram' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_pinterest != blank -%}
+            <li><a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">{%- render 'icon', icon: 'pinterest' -%}</a></li>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <li><a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">{%- render 'icon', icon: 'youtube' -%}</a></li>
+          {%- endif -%}
+        </ul>
+        {%- if section.settings.show_payment_icons -%}
+          <ul class="footer__payments payment-icons" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        <p class="footer__copyright">
+          {%- assign copyright_year = 'now' | date: '%Y' -%}
+          {%- assign copyright_shop = shop.name | upcase -%}
+          {{ 'general.copyright' | t: year: copyright_year, shop: copyright_shop }}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "tag": "div",
+  "class": "section-footer",
+  "enabled_on": { "groups": ["footer"] },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo claro (opcional)",
+      "info": "Versión clara del logo para fondo oscuro. Vacío = nombre de la tienda."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Ancho del logo",
+      "min": 80,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 190
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Frase",
+      "default": "Habla con alguien que entiende la piel sensible"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Mostrar formulario de contacto",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Enviar mensaje"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Mostrar métodos de pago",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fondo",
+      "default": "#383A2E"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto",
+      "default": "#FEF9E4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menú",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Enlaces rápidos" },
+        { "type": "link_list", "id": "menu", "label": "Menú", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Atención al cliente" },
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Lunes a viernes, 9:00-18:00</p>" }
+      ]
+    }
+  ]
+}
+{% endschema %}

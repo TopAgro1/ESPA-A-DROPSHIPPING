@@ -1,0 +1,40 @@
+<section class="account section-pt section-pb">
+  <div class="page-width page-width--narrow account__box">
+    <h1 class="h-section h-section--center">{{ 'customer.login_title' | t }}</h1>
+    {%- form 'customer_login', class: 'account__form' -%}
+      {{ form.errors | default_errors }}
+      <div class="field">
+        <label class="field__label" for="CustomerEmail">{{ 'customer.email' | t }}</label>
+        <input class="field__input" type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" required>
+      </div>
+      {%- if form.password_needed -%}
+        <div class="field">
+          <label class="field__label" for="CustomerPassword">{{ 'customer.password' | t }}</label>
+          <input class="field__input" type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" required>
+        </div>
+        <p><a href="#recover" class="account__link">{{ 'customer.forgot_password' | t }}</a></p>
+      {%- endif -%}
+      <button type="submit" class="btn btn--primary btn--block">{{ 'customer.sign_in' | t }}</button>
+      <p class="text-center"><a href="{{ routes.account_register_url }}" class="account__link">{{ 'customer.create_account' | t }}</a></p>
+    {%- endform -%}
+
+    <div id="recover" class="account__recover">
+      <h2 class="account__subtitle">{{ 'customer.recover_title' | t }}</h2>
+      {%- form 'recover_customer_password', class: 'account__form' -%}
+        {{ form.errors | default_errors }}
+        {%- if form.posted_successfully? -%}<p class="form-success">{{ 'customer.recover_success' | t }}</p>{%- endif -%}
+        <div class="field">
+          <label class="field__label" for="RecoverEmail">{{ 'customer.email' | t }}</label>
+          <input class="field__input" type="email" name="email" id="RecoverEmail" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn--outline btn--block">{{ 'customer.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+
+    {%- if shop.checkout.guest_login -%}
+      {%- form 'guest_login' -%}
+        <button type="submit" class="btn btn--outline btn--block">{{ 'customer.guest' | t }}</button>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>

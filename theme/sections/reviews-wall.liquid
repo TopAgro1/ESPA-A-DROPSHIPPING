@@ -1,0 +1,280 @@
+{%- comment -%}
+  "2,300+ Customers Trust Us": resumen de valoraciones + muro de reseñas con "Cargar más".
+  La nota media y el total se calculan a partir del desglose por estrellas, así siempre cuadran.
+{%- endcomment -%}
+{%- liquid
+  assign c5 = section.settings.count_5 | default: 0
+  assign c4 = section.settings.count_4 | default: 0
+  assign c3 = section.settings.count_3 | default: 0
+  assign c2 = section.settings.count_2 | default: 0
+  assign c1 = section.settings.count_1 | default: 0
+  assign total = c5 | plus: c4 | plus: c3 | plus: c2 | plus: c1
+  assign average = 0
+  if total > 0
+    assign w5 = c5 | times: 5
+    assign w4 = c4 | times: 4
+    assign w3 = c3 | times: 3
+    assign w2 = c2 | times: 2
+    assign weighted = w5 | plus: w4 | plus: w3 | plus: w2 | plus: c1
+    assign average = weighted | times: 1.0 | divided_by: total
+  endif
+  assign review_form_id = 'ReviewForm-' | append: section.id
+  assign per_page = section.settings.per_page
+  assign product_title = product.title | default: section.settings.heading
+-%}
+
+<section id="reviews" class="reviews section-pt" data-reviews data-per-page="{{ per_page }}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h-section reveal">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.show_summary and total > 0 -%}
+      <div class="reviews__summary reveal">
+        <div class="reviews__score">
+          <div class="reviews__score-row">
+            <span class="reviews__average">{%- render 'format-decimal', number: average -%}</span>
+            <div class="reviews__score-meta">
+              {%- render 'stars', rating: average, size: 'lg', outline: true -%}
+              <span class="reviews__based">
+                {%- capture total_formatted -%}{%- render 'format-number', number: total -%}{%- endcapture -%}
+                {{ 'reviews.based_on' | t: count: total_formatted }}
+              </span>
+            </div>
+          </div>
+          {%- if section.settings.show_write_button -%}
+            <button type="button" class="btn btn--primary btn--wide" data-modal-open="ReviewModal-{{ section.id }}">
+              {{ section.settings.write_label }}
+            </button>
+          {%- endif -%}
+        </div>
+
+        <div class="reviews__bars">
+          {%- for star in (1..5) reversed -%}
+            {%- liquid
+              case star
+                when 5
+                  assign bar_count = c5
+                when 4
+                  assign bar_count = c4
+                when 3
+                  assign bar_count = c3
+                when 2
+                  assign bar_count = c2
+                else
+                  assign bar_count = c1
+              endcase
+              assign bar_pct = 0
+              if total > 0
+                assign bar_pct = bar_count | times: 100.0 | divided_by: total | round: 1
+              endif
+            -%}
+            <div class="bar" role="img" aria-label="{{ 'reviews.bar_aria' | t: stars: star, count: bar_count }}">
+              <span class="bar__label">{{ star }}</span>
+              {%- render 'icon', icon: 'star', class: 'bar__star' -%}
+              <span class="bar__track"><span class="bar__fill" style="width: {{ bar_pct }}%;"></span></span>
+              <span class="bar__count">{%- render 'format-number', number: bar_count -%}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_static_reviews -%}
+      <div class="reviews__list">
+        {%- assign review_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            {%- assign review_index = review_index | plus: 1 -%}
+            <article class="review reveal" data-review{% if review_index > per_page %} hidden{% endif %} {{ block.shopify_attributes }}>
+              <div class="review__author">
+                <p class="review__name">{{ block.settings.name }}</p>
+                {%- if block.settings.verified -%}
+                  <p class="review__verified">{%- render 'icon', icon: 'check-badge' -%}{{ 'reviews.verified' | t }}</p>
+                {%- endif -%}
+              </div>
+              <div class="review__body">
+                <div class="review__meta">
+                  {%- render 'stars', rating: block.settings.rating, size: 'sm' -%}
+                  {%- if block.settings.date != blank -%}
+                    <span class="review__date">{{ block.settings.date }}</span>
+                  {%- endif -%}
+                </div>
+                <p class="review__text">{{ block.settings.text }}</p>
+                {%- if block.settings.image != blank -%}
+                  <button type="button" class="review__photo" data-zoom data-src="{{ block.settings.image | image_url: width: 1400 }}" aria-label="{{ 'products.zoom' | t }}">
+                    {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}
+                  </button>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if review_index > per_page -%}
+        <div class="reviews__more">
+          <button type="button" class="btn btn--primary btn--sm" data-load-more>{{ section.settings.load_more_label }}</button>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == '@app' -%}
+        <div class="reviews__app">{% render block %}</div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.show_write_button -%}
+    <div class="modal" id="ReviewModal-{{ section.id }}" data-modal aria-hidden="true">
+      <div class="modal__overlay" data-modal-close></div>
+      <div class="modal__dialog modal__dialog--form" role="dialog" aria-modal="true" aria-labelledby="ReviewModalTitle-{{ section.id }}" tabindex="-1">
+        <button type="button" class="modal__close icon-btn" data-modal-close aria-label="{{ 'general.close' | t }}">
+          {%- render 'icon', icon: 'close' -%}
+        </button>
+        <h3 class="modal__title" id="ReviewModalTitle-{{ section.id }}">{{ section.settings.write_label }}</h3>
+        {%- form 'contact', id: review_form_id, class: 'review-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-success" role="status">{{ 'reviews.thanks' | t }}</p>
+          {%- endif -%}
+          {{ form.errors | default_errors }}
+          <input type="hidden" name="contact[Tipo]" value="Reseña">
+          <input type="hidden" name="contact[Producto]" value="{{ product_title | escape }}">
+          <div class="field">
+            <label class="field__label" for="{{ review_form_id }}-rating">{{ 'reviews.form_rating' | t }}</label>
+            <div class="select">
+              <select class="select__input" id="{{ review_form_id }}-rating" name="contact[Valoración]">
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★</option>
+                <option value="3">★★★</option>
+                <option value="2">★★</option>
+                <option value="1">★</option>
+              </select>
+              {%- render 'icon', icon: 'chevron-down' -%}
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="{{ review_form_id }}-name">{{ 'reviews.form_name' | t }}</label>
+            <input class="field__input" id="{{ review_form_id }}-name" type="text" name="contact[name]" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="{{ review_form_id }}-email">{{ 'reviews.form_email' | t }}</label>
+            <input class="field__input" id="{{ review_form_id }}-email" type="email" name="contact[email]" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label class="field__label" for="{{ review_form_id }}-body">{{ 'reviews.form_body' | t }}</label>
+            <textarea class="field__input" id="{{ review_form_id }}-body" name="contact[body]" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">{{ 'reviews.form_submit' | t }}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Reseñas",
+  "tag": "div",
+  "class": "section-reviews",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Usa solo reseñas reales: en la UE es ilegal publicar reseñas inventadas o marcarlas como verificadas sin comprobarlo (Directiva Ómnibus). Si usas Judge.me, Loox o similar, añade su bloque de app y desactiva las reseñas manuales."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "+2.300 clientes confían en nosotros"
+    },
+    {
+      "type": "header",
+      "content": "Resumen"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Mostrar resumen de valoraciones",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "La nota media y el total se calculan solos a partir de estos números."
+    },
+    { "type": "number", "id": "count_5", "label": "Reseñas de 5 estrellas", "default": 2348 },
+    { "type": "number", "id": "count_4", "label": "Reseñas de 4 estrellas", "default": 180 },
+    { "type": "number", "id": "count_3", "label": "Reseñas de 3 estrellas", "default": 68 },
+    { "type": "number", "id": "count_2", "label": "Reseñas de 2 estrellas", "default": 29 },
+    { "type": "number", "id": "count_1", "label": "Reseñas de 1 estrella", "default": 18 },
+    {
+      "type": "checkbox",
+      "id": "show_write_button",
+      "label": "Mostrar botón \"Escribir una reseña\"",
+      "info": "Abre un formulario que te llega por email (formulario de contacto de Shopify).",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "write_label",
+      "label": "Texto del botón",
+      "default": "Escribir una reseña"
+    },
+    {
+      "type": "header",
+      "content": "Listado"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_static_reviews",
+      "label": "Mostrar reseñas manuales (bloques)",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "label": "Reseñas visibles antes de \"Cargar más\"",
+      "min": 2,
+      "max": 20,
+      "step": 2,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "label": "Texto de \"Cargar más\"",
+      "default": "Cargar más"
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "review",
+      "name": "Reseña",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Jason M." },
+        { "type": "checkbox", "id": "verified", "label": "Compra verificada", "info": "Marca solo si has comprobado el pedido.", "default": true },
+        { "type": "range", "id": "rating", "label": "Estrellas", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "date", "label": "Fecha", "default": "10/01/26" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Reseña",
+          "default": "Este sérum se absorbe al instante y nunca se siente pesado ni pegajoso. Noté la piel más suave, más hidratada y menos irritada tras pocos usos."
+        },
+        { "type": "image_picker", "id": "image", "label": "Foto (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reseñas",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review", "settings": { "name": "Daniel R.", "date": "17/01/26" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

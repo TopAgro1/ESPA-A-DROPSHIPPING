@@ -1,0 +1,105 @@
+{%- comment -%}
+  "Recommended For You": tarjetas de producto elegidas a mano.
+{%- endcomment -%}
+<section id="Recommended-{{ section.id }}" class="recommended section-pt">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h-section reveal">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="recommended__grid" style="--cols: {{ section.settings.columns }};">
+      {%- for block in section.blocks -%}
+        <div class="recommended__item" {{ block.shopify_attributes }}>
+          {%- render 'product-card',
+            product: block.settings.product,
+            title: block.settings.title,
+            badge: block.settings.badge,
+            description: block.settings.description,
+            rating: block.settings.rating,
+            reviews_count: block.settings.reviews_count,
+            placeholder_index: forloop.index
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Recomendados",
+  "tag": "div",
+  "class": "section-recommended",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Recomendado para ti"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columnas en ordenador",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Producto",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Producto"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título (opcional)",
+          "info": "Déjalo vacío para usar el nombre del producto."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Etiqueta",
+          "default": "Para mujer"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Frase corta",
+          "default": "Calma las rojeces de la piel reactiva."
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Nota",
+          "info": "Déjalo vacío para usar la nota de tu app de reseñas (metacampo reviews.rating)."
+        },
+        {
+          "type": "text",
+          "id": "reviews_count",
+          "label": "Nº de reseñas"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recomendados",
+      "blocks": [
+        { "type": "product", "settings": { "title": "Sérum post-afeitado", "badge": "Para hombre", "description": "Calma la irritación y reduce las rojeces." } },
+        { "type": "product", "settings": { "title": "Crema reparadora de noche", "badge": "Para hombre", "description": "Repara e hidrata mientras duermes." } },
+        { "type": "product", "settings": { "title": "Sérum calmante", "badge": "Para mujer", "description": "Calma las rojeces de la piel reactiva." } },
+        { "type": "product", "settings": { "title": "Protector barrera SPF", "badge": "Para mujer", "description": "Protección UV diaria para piel sensible." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

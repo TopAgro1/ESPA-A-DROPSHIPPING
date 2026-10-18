@@ -1,0 +1,30 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ 'gift_card.title' | t }} &ndash; {{ shop.name }}</title>
+    {%- render 'theme-styles' -%}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body class="template-gift-card">
+    <main class="page-content section-pt section-pb text-center">
+      <div class="page-width page-width--narrow">
+        <div class="password__logo">{%- render 'logo' -%}</div>
+        <h1 class="h-section h-section--center">{{ 'gift_card.title' | t }}</h1>
+        <p class="gift-card__amount">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.enabled == false or gift_card.expired -%}
+          <p class="page-content__lead">{{ 'gift_card.expired' | t }}</p>
+        {%- endif -%}
+        <p class="gift-card__code" id="GiftCardCode">{{ gift_card.code | format_code }}</p>
+        <div class="gift-card__qr" data-identifier="{{ gift_card.qr_identifier }}"></div>
+        <p><a href="{{ shop.url }}" class="btn btn--primary">{{ 'gift_card.shop_link' | t }}</a></p>
+        {%- if gift_card.pass_url -%}
+          <p><a href="{{ gift_card.pass_url }}">{{ 'gift_card.apple_wallet' | t }}</a></p>
+        {%- endif -%}
+      </div>
+    </main>
+  </body>
+</html>

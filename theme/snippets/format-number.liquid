@@ -1,0 +1,15 @@
+{%- comment -%}
+  Formatea un entero con separador de miles según el idioma (2643 → 2.643).
+  - number: entero
+{%- endcomment -%}
+{%- liquid
+  assign fn_value = number | default: 0 | floor
+  assign fn_sep = 'general.thousands_separator' | t
+  if fn_value >= 1000
+    assign fn_thousands = fn_value | divided_by: 1000 | floor
+    assign fn_rest = fn_value | modulo: 1000 | prepend: '00' | slice: -3, 3
+    echo fn_thousands | append: fn_sep | append: fn_rest
+  else
+    echo fn_value
+  endif
+-%}

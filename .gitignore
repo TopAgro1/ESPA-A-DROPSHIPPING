@@ -1,0 +1,4 @@
+# Dependencias y salidas locales de las herramientas
+tools/node_modules/
+tools/.preview/
+.DS_Store

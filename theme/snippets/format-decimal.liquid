@@ -1,0 +1,9 @@
+{%- comment -%}
+  Formatea un decimal con 1 cifra y la coma/punto del idioma (4.86 → 4,9).
+  - number: valor numérico
+{%- endcomment -%}
+{%- liquid
+  assign fd_sep = 'general.decimal_separator' | t
+  assign fd_value = number | default: 0 | times: 1.0 | round: 1 | append: ''
+  echo fd_value | replace: '.', fd_sep
+-%}
