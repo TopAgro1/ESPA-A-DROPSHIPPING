@@ -1,0 +1,84 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.intro %}
+    <ul class="pains" role="list">
+      {%- for block in section.blocks -%}
+        <li class="pain" {{ block.shopify_attributes }}>
+          <span class="pain__icon">{% render 'icon', name: block.settings.icon, size: 26 %}</span>
+          <div>
+            <h3 class="pain__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.text != blank -%}<p class="pain__text">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.closing != blank -%}
+      <div class="pains__closing rte">{{ section.settings.closing }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problema",
+  "tag": "div",
+  "class": "section-problem",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" },
+        { "value": "brand", "label": "Marca" }
+      ],
+      "default": "alt"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "¿Te pasa esto?" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Tu piel cambió, pero tu rutina sigue igual" },
+    { "type": "inline_richtext", "id": "intro", "label": "Introducción" },
+    {
+      "type": "richtext",
+      "id": "closing",
+      "label": "Cierre (agitación)",
+      "default": "<p>Armar una rutina antiedad completa suele significar <strong>tres productos distintos</strong>: un sérum de retinol, otro de ácido hialurónico y una crema reafirmante. Es caro, son muchos pasos y casi nadie la cumple todos los días.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pain",
+      "name": "Dolor",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "droplets", "label": "Gotas" },
+            { "value": "face", "label": "Rostro" },
+            { "value": "firm", "label": "Firmeza" },
+            { "value": "clock", "label": "Reloj" },
+            { "value": "layers", "label": "Capas" },
+            { "value": "sun", "label": "Sol" }
+          ],
+          "default": "droplets"
+        },
+        { "type": "text", "id": "title", "label": "Título", "default": "Piel tirante y opaca" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problema",
+      "blocks": [
+        { "type": "pain", "settings": { "icon": "droplets", "title": "Piel tirante y opaca", "text": "Aunque te hidrates, a media tarde la sientes seca y sin luz." } },
+        { "type": "pain", "settings": { "icon": "face", "title": "Líneas finas más visibles", "text": "Se notan más cada mes, sobre todo alrededor de los ojos y al maquillarte." } },
+        { "type": "pain", "settings": { "icon": "firm", "title": "Rostro y cuello menos firmes", "text": "El contorno ya no se ve como antes y no sabes por dónde empezar." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

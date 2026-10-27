@@ -1,0 +1,37 @@
+{%- if section.settings.products.count > 0 -%}
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading %}
+    <div class="grid grid--products">
+      {%- for item in section.settings.products -%}
+        {% render 'product-card', card_product: item %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Completa tu rutina",
+  "tag": "div",
+  "class": "section-cross-sell",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Combínala con" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Completa tu rutina" },
+    { "type": "product_list", "id": "products", "label": "Productos", "limit": 4 }
+  ],
+  "presets": [{ "name": "Completa tu rutina" }]
+}
+{% endschema %}

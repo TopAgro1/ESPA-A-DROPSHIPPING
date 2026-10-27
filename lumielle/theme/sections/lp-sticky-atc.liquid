@@ -1,0 +1,54 @@
+{%- comment -%}
+  Barra de compra fija: aparece cuando el botón principal sale de la pantalla.
+  En contra entrega lleva al selector de packs; en pago en línea agrega al carrito.
+{%- endcomment -%}
+{%- liquid
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  if settings.payment_mode == 'cod'
+    assign label = section.settings.label | default: settings.cod_button_label
+  else
+    assign label = section.settings.label | default: settings.card_button_label
+  endif
+-%}
+{%- if product != blank -%}
+<div class="sticky-atc" data-sticky-atc aria-hidden="true">
+  <div class="container sticky-atc__inner">
+    <div class="sticky-atc__product">
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', class: 'sticky-atc__img', widths: '60, 120' }}
+      {%- endif -%}
+      <div class="sticky-atc__meta">
+        <p class="sticky-atc__title">{{ product.title | escape }}</p>
+        <p class="sticky-atc__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</p>
+      </div>
+    </div>
+    <button type="button" class="btn btn--cta sticky-atc__btn" data-sticky-cta tabindex="-1">
+      <span>{{ label }}</span>
+    </button>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra de compra fija",
+  "tag": "div",
+  "class": "section-sticky-atc",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Producto (solo inicio)" },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Texto del botón (opcional)",
+      "info": "Vacío = el de Configuración del tema → Venta y cobro. En móvil conviene corto, p. ej. \"Pedir ahora\"."
+    }
+  ],
+  "presets": [{ "name": "Barra de compra fija" }],
+  "enabled_on": { "templates": ["product", "index"] }
+}
+{% endschema %}

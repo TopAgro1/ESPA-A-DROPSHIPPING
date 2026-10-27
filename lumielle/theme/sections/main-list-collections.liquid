@@ -1,0 +1,25 @@
+<section class="section scheme-white">
+  <div class="container">
+    <h1 class="h2 page-title">{{ 'collections.all_title' | t }}</h1>
+    <div class="grid grid--products">
+      {%- for item in collections -%}
+        <a class="collection-card" href="{{ item.url }}">
+          {%- if item.featured_image -%}
+            {%- assign item_alt = item.title | escape -%}
+            {{ item.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', alt: item_alt, widths: '360, 540, 720', sizes: '(min-width: 990px) 25vw, 50vw' }}
+          {%- endif -%}
+          <span class="collection-card__title">{{ item.title | escape }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lista de colecciones",
+  "tag": "div",
+  "class": "section-list-collections",
+  "settings": []
+}
+{% endschema %}

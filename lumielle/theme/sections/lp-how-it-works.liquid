@@ -1,0 +1,73 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <ol class="steps" role="list">
+      {%- for block in section.blocks -%}
+        <li class="step" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="step__media">{% render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 30vw, 90vw', max_width: 900 %}</div>
+          {%- endif -%}
+          <div class="step__body">
+            <span class="step__num" aria-hidden="true">{{ forloop.index }}</span>
+            <h3 class="step__title">{{ block.settings.title }}</h3>
+            <p class="step__text">{{ block.settings.text }}</p>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if section.settings.tip != blank -%}
+      <div class="tip">{% render 'icon', name: 'sparkle', size: 20 %}<p>{{ section.settings.tip }}</p></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pasos (cómo funciona)",
+  "tag": "div",
+  "class": "section-steps",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Cómo se usa" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Tu rutina de noche en 3 pasos" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto" },
+    {
+      "type": "inline_richtext",
+      "id": "tip",
+      "label": "Consejo",
+      "default": "<strong>¿Primera vez con retinol?</strong> Haz una prueba en una zona pequeña 24 horas antes y empieza 3 noches por semana."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Paso",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen (opcional)" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Limpia" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Lava tu rostro y cuello y sécalos con suaves toques." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pasos",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Limpia", "text": "Lava tu rostro y cuello y sécalos con suaves toques." } },
+        { "type": "step", "settings": { "title": "Aplica", "text": "Esparce una pequeña cantidad en rostro y cuello con movimientos ascendentes, evitando el contorno de ojos." } },
+        { "type": "step", "settings": { "title": "Protege", "text": "Úsala en la noche. En la mañana aplica protector solar: con retinol tu piel lo necesita más." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

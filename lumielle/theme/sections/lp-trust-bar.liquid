@@ -1,0 +1,72 @@
+<section class="trust-bar scheme-{{ section.settings.scheme }}">
+  <div class="container">
+    <ul class="trust-bar__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="trust-bar__item" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon, size: 28, class: 'trust-bar__icon' %}
+          <div>
+            <p class="trust-bar__title">{{ block.settings.title }}</p>
+            {%- if block.settings.text != blank -%}<p class="trust-bar__text">{{ block.settings.text }}</p>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Barra de confianza",
+  "tag": "div",
+  "class": "section-trust-bar",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Elemento",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "truck", "label": "Camión" },
+            { "value": "cash", "label": "Efectivo" },
+            { "value": "shield", "label": "Escudo" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "return", "label": "Devolución" },
+            { "value": "lock", "label": "Candado" },
+            { "value": "map-pin", "label": "Ubicación" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "title", "label": "Título", "default": "Envío gratis" },
+        { "type": "text", "id": "text", "label": "Texto", "default": "A toda Colombia" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de confianza",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Envío gratis", "text": "A toda Colombia" } },
+        { "type": "item", "settings": { "icon": "cash", "title": "Paga al recibir", "text": "En efectivo, sin tarjeta" } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Garantía de 30 días", "text": "O te devolvemos tu dinero" } },
+        { "type": "item", "settings": { "icon": "chat", "title": "Atención por WhatsApp", "text": "Te acompañamos en tu pedido" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{%- liquid
+  assign menu = section.settings.menu
+-%}
+<header class="header{% if section.settings.sticky %} header--sticky{% endif %}" data-header>
+  <div class="container header__inner">
+    {%- if menu.links.size > 0 -%}
+      <details class="header__drawer" data-menu-drawer>
+        <summary class="header__icon header__menu-toggle" aria-label="{{ 'general.menu' | t }}">
+          {% render 'icon', name: 'menu', size: 24, class: 'icon-open' %}
+          {% render 'icon', name: 'close', size: 24, class: 'icon-close' %}
+        </summary>
+        <nav class="menu-drawer" aria-label="{{ 'general.menu' | t }}">
+          <ul class="menu-drawer__list" role="list">
+            {%- for link in menu.links -%}
+              <li><a class="menu-drawer__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- if settings.whatsapp_number != blank -%}
+            {%- assign wa_number = settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' -%}
+            <a class="menu-drawer__wa" href="https://wa.me/{{ wa_number }}?text={{ settings.whatsapp_message | url_encode }}" target="_blank" rel="noopener">
+              {% render 'icon', name: 'whatsapp', size: 20 %} {{ settings.whatsapp_label | escape }}
+            </a>
+          {%- endif -%}
+        </nav>
+      </details>
+    {%- endif -%}
+
+    <a class="header__logo logo" href="{{ routes.root_url }}">
+      {% render 'logo' %}
+    </a>
+
+    {%- if menu.links.size > 0 -%}
+      <nav class="header__nav" aria-label="{{ 'general.menu' | t }}">
+        <ul class="header__nav-list" role="list">
+          {%- for link in menu.links -%}
+            <li><a class="header__nav-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="header__actions">
+      {%- if section.settings.show_search -%}
+        <a class="header__icon" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">{% render 'icon', name: 'search', size: 22 %}</a>
+      {%- endif -%}
+      <a class="header__icon header__cart" href="{{ routes.cart_url }}" data-cart-toggle aria-label="{{ 'cart.title' | t }}">
+        {% render 'icon', name: 'cart', size: 24 %}
+        <span class="cart-count{% if cart.item_count == 0 %} is-empty{% endif %}" data-cart-count aria-hidden="true">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "tag": "div",
+  "class": "section-header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "Fijo al hacer scroll", "default": true },
+    { "type": "checkbox", "id": "show_search", "label": "Mostrar buscador", "default": false }
+  ],
+  "presets": [{ "name": "Encabezado" }],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

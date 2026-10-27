@@ -1,0 +1,77 @@
+{%- comment -%}
+  Infografía viva: imagen central con llamadas a los lados (ingredientes, mecanismo, specs).
+{%- endcomment -%}
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <div class="infographic">
+      <div class="infographic__media">
+        {%- if section.settings.image != blank -%}
+          {% render 'responsive-image', image: section.settings.image, sizes: '(min-width: 990px) 40vw, 90vw', max_width: 1200, class: 'infographic__img' %}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <ol class="infographic__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="callout" {{ block.shopify_attributes }}>
+            <span class="callout__num" aria-hidden="true">{{ forloop.index }}</span>
+            <div>
+              {%- if block.settings.tag != blank -%}<p class="callout__tag">{{ block.settings.tag }}</p>{%- endif -%}
+              <h3 class="callout__title">{{ block.settings.title }}</h3>
+              <p class="callout__text">{{ block.settings.text }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+    {%- if section.settings.note != blank -%}<p class="section-note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Infografía",
+  "tag": "div",
+  "class": "section-infographic",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Cómo funciona" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "3 activos antiedad, <em>1 solo paso</em>" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto", "default": "Lo que normalmente compras en tres frascos, en una sola crema para rostro y cuello." },
+    { "type": "image_picker", "id": "image", "label": "Imagen central", "info": "PNG del producto sin fondo o la infografía de activos." },
+    { "type": "text", "id": "note", "label": "Nota al pie", "default": "Lista completa de ingredientes (INCI) en el empaque." }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Llamada",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Etiqueta", "default": "Hidrata" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Ácido hialurónico" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Atrae y retiene agua en la piel: la deja suave y elástica desde la primera aplicación." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infografía",
+      "blocks": [
+        { "type": "callout", "settings": { "tag": "Hidrata", "title": "Ácido hialurónico", "text": "Atrae y retiene agua en la piel: la deja suave y elástica desde la primera aplicación." } },
+        { "type": "callout", "settings": { "tag": "Renueva", "title": "Retinol", "text": "El clásico de las rutinas antiedad: suaviza visiblemente las líneas finas y mejora la textura con el uso constante." } },
+        { "type": "callout", "settings": { "tag": "Reafirma", "title": "Colágeno", "text": "Ayuda a retener la hidratación y contribuye a mejorar el aspecto de firmeza de la piel." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

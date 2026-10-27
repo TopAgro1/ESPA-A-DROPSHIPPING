@@ -1,0 +1,90 @@
+{
+  "general": {
+    "page": "Page {{ page }}",
+    "menu": "Menu",
+    "search": "Search",
+    "close": "Close",
+    "pagination": "Pagination",
+    "404_title": "Page not found",
+    "404_text": "The link may have changed. Let's take you back home.",
+    "back_home": "Back to home"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "product": {
+    "added": "✓ Added",
+    "adding": "Adding…",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "from_price": "From {{ price }}",
+    "regular_price": "Regular price",
+    "rating_label": "Rated {{ rating }} out of 5",
+    "reviews_count": {
+      "one": "{{ count }} review",
+      "other": "{{ count }} reviews"
+    },
+    "gallery": "Product image gallery",
+    "previous": "Previous image",
+    "next": "Next image",
+    "show_media": "Show image {{ index }}",
+    "reference_price": "Price when bought individually",
+    "savings_short": "You save",
+    "per_unit": "Works out to",
+    "each": "each",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "low_stock": {
+      "one": "Only {{ count }} left!",
+      "other": "Only {{ count }} left!"
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "error": "We couldn't update your cart. Please try again.",
+    "updated": "Cart updated",
+    "remove": "Remove",
+    "empty": "Your cart is empty.",
+    "continue": "Shop products",
+    "add_upsell": "Add",
+    "subtotal": "Total",
+    "checkout": "Check out",
+    "free_shipping_always": "Free shipping on every order",
+    "free_shipping_remaining_html": "You're <strong>{{ amount }}</strong> away from free shipping",
+    "free_shipping_unlocked": "You've unlocked free shipping!"
+  },
+  "sections": {
+    "comparison": {
+      "feature": "Feature",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "reviews": {
+      "verified": "Verified purchase"
+    }
+  },
+  "collections": {
+    "empty": "No products in this collection yet.",
+    "all_title": "Collections"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "What are you looking for?",
+    "submit": "Search",
+    "results_count": {
+      "one": "{{ count }} result for “{{ terms }}”",
+      "other": "{{ count }} results for “{{ terms }}”"
+    }
+  },
+  "password": {
+    "title": "Coming soon",
+    "label": "Password",
+    "submit": "Enter"
+  },
+  "gift_card": {
+    "title": "Your gift card",
+    "expired": "This gift card is no longer active.",
+    "shop": "Go to store"
+  }
+}

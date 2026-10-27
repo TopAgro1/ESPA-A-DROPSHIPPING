@@ -1,0 +1,59 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <div class="ugc" data-ugc>
+      {%- for block in section.blocks -%}
+        <figure class="ugc__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.video != blank -%}
+            {{ block.settings.video | video_tag: image_size: '720x', autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'none', class: 'ugc__video' }}
+          {%- elsif block.settings.image != blank -%}
+            {% render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 25vw, 70vw', max_width: 900 %}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          {%- if block.settings.caption != blank -%}<figcaption class="ugc__caption">{{ block.settings.caption }}</figcaption>{%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Videos y UGC",
+  "tag": "div",
+  "class": "section-ugc",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Usa solo videos e imágenes reales de clientas o creadoras (con su permiso). Sube videos verticales 9:16 de 15-30 s con subtítulos."
+    },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "alt"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "En la vida real" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Mira la textura y cómo se aplica" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto" }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video o imagen",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "image_picker", "id": "image", "label": "Imagen (si no hay video)" },
+        { "type": "text", "id": "caption", "label": "Pie" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Videos y UGC" }]
+}
+{% endschema %}

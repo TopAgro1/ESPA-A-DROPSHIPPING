@@ -1,0 +1,126 @@
+{%- comment -%}
+  Oferta: repite los packs con imagen. Al elegir uno, se selecciona en la ficha y se lleva al botón de compra.
+{%- endcomment -%}
+{%- liquid
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+  if product == blank
+    assign product = collections.all.products.first
+  endif
+  assign pack_name = section.settings.pack_option_name | downcase | strip
+  assign pack_index = -1
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == pack_name
+      assign pack_index = forloop.index0
+    endif
+  endfor
+  assign unit_price = product.variants.first.price
+-%}
+{%- if product != blank and pack_index >= 0 -%}
+  {%- for v in product.variants -%}
+    {%- assign q = v.options[pack_index] | split: ' ' | first | plus: 0 -%}
+    {%- if q == 1 -%}{%- assign unit_price = v.price -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+<section class="section scheme-{{ section.settings.scheme }}" id="oferta" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <div class="offer">
+      {%- for value in product.options_with_values[pack_index].values -%}
+        {%- liquid
+          assign position = forloop.index
+          assign pack_variant = nil
+          for v in product.variants
+            if v.options[pack_index] == value
+              assign pack_variant = v
+              break
+            endif
+          endfor
+          assign q = value | split: ' ' | first | plus: 0
+          if q < 1
+            assign q = 1
+          endif
+          assign pack_ref = unit_price | times: q
+          assign pack_save = pack_ref | minus: pack_variant.price
+          assign pack_unit = pack_variant.price | divided_by: q
+          capture image_key
+            echo 'image_' | append: position
+          endcapture
+          capture note_key
+            echo 'note_' | append: position
+          endcapture
+          assign is_popular = false
+          if position == section.settings.popular_position
+            assign is_popular = true
+          endif
+        -%}
+        <article class="offer-card{% if is_popular %} offer-card--popular{% endif %}">
+          {%- if is_popular and section.settings.popular_badge != blank -%}<span class="offer-card__badge">{{ section.settings.popular_badge }}</span>{%- endif -%}
+          <div class="offer-card__media">
+            {%- if section.settings[image_key] != blank -%}
+              {% render 'responsive-image', image: section.settings[image_key], sizes: '(min-width: 990px) 25vw, 60vw', max_width: 800 %}
+            {%- elsif product.featured_media -%}
+              {% render 'responsive-image', image: product.featured_media, sizes: '(min-width: 990px) 25vw, 60vw', max_width: 800 %}
+            {%- endif -%}
+          </div>
+          <h3 class="offer-card__title">{{ value | escape }}</h3>
+          {%- if section.settings[note_key] != blank -%}<p class="offer-card__note">{{ section.settings[note_key] }}</p>{%- endif -%}
+          <p class="offer-card__price">{{ pack_variant.price | money_without_trailing_zeros }}</p>
+          {%- if pack_save > 0 -%}
+            <p class="offer-card__save">
+              <s><span class="visually-hidden">{{ 'product.reference_price' | t }}</span> {{ pack_ref | money_without_trailing_zeros }}</s>
+              {{ 'product.savings_short' | t }} {{ pack_save | money_without_trailing_zeros }}
+            </p>
+            <p class="offer-card__unit">{{ pack_unit | money_without_trailing_zeros }} {{ 'product.each' | t }}</p>
+          {%- endif -%}
+          <a class="btn {% if is_popular %}btn--cta{% else %}btn--outline{% endif %} btn--block" href="{{ product.url }}?variant={{ pack_variant.id }}" data-select-pack="{{ value | escape }}" data-pack-index="{{ pack_index }}">
+            {{ section.settings.button_label }}
+          </a>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.footer != blank -%}<p class="offer__footer">{% render 'icon', name: 'shield', size: 20 %} {{ section.settings.footer }}</p>{%- endif -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Oferta (packs)",
+  "tag": "div",
+  "class": "section-offer",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Producto (solo inicio)" },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "alt"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Elige tu pack" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Entre más llevas, más ahorras" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto", "default": "Envío gratis a toda Colombia y pagas en efectivo cuando recibes." },
+    { "type": "text", "id": "pack_option_name", "label": "Nombre de la opción de pack", "default": "Cantidad" },
+    { "type": "range", "id": "popular_position", "min": 0, "max": 4, "step": 1, "label": "Pack destacado (posición)", "default": 2 },
+    { "type": "text", "id": "popular_badge", "label": "Etiqueta del pack destacado", "default": "Más popular" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Elegir este pack" },
+    { "type": "image_picker", "id": "image_1", "label": "Imagen del pack 1" },
+    { "type": "text", "id": "note_1", "label": "Nota del pack 1", "default": "Para empezar tu rutina" },
+    { "type": "image_picker", "id": "image_2", "label": "Imagen del pack 2" },
+    { "type": "text", "id": "note_2", "label": "Nota del pack 2", "default": "La 2.ª unidad al 50 %" },
+    { "type": "image_picker", "id": "image_3", "label": "Imagen del pack 3" },
+    { "type": "text", "id": "note_3", "label": "Nota del pack 3", "default": "Lleva 3 y paga 2: para ti y para regalar" },
+    { "type": "image_picker", "id": "image_4", "label": "Imagen del pack 4" },
+    { "type": "text", "id": "note_4", "label": "Nota del pack 4" },
+    { "type": "text", "id": "footer", "label": "Texto al pie", "default": "Garantía de satisfacción de 30 días en todos los packs" }
+  ],
+  "presets": [{ "name": "Oferta (packs)" }],
+  "enabled_on": { "templates": ["product", "index"] }
+}
+{% endschema %}

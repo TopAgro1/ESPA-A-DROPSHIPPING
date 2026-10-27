@@ -1,0 +1,87 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_brand }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- endif -%}
+
+    <title>
+      {{- page_title -}}
+      {%- if current_tags %} – {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} – {{ 'general.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+    </title>
+    {%- if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif %}
+
+    {% render 'meta-tags' %}
+    {% render 'theme-styles' %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name }}{% if settings.reveal_on_scroll %} has-reveal{% endif %}{% if settings.cta_pulse %} has-cta-pulse{% endif %}">
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+    {% section 'cart-drawer' %}
+    {% render 'whatsapp-float' %}
+
+    <div class="visually-hidden" aria-live="polite" id="LiveRegion"></div>
+
+    {%- liquid
+      assign is_cod = false
+      if settings.payment_mode == 'cod'
+        assign is_cod = true
+      endif
+    -%}
+    <script>
+      window.Lumielle = {
+        routes: {
+          root: {{ routes.root_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }},
+          cart: {{ routes.cart_url | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        cartType: {{ settings.cart_type | json }},
+        cod: {{ is_cod | json }},
+        delivery: {
+          min: {{ settings.delivery_min_days | json }},
+          max: {{ settings.delivery_max_days | json }},
+          cutoff: {{ settings.cutoff_hour | json }},
+          saturday: {{ settings.saturday_business_day | json }},
+          holidays: {{ settings.holidays | default: '' | json }},
+          locale: {{ settings.date_locale | default: 'es-CO' | json }},
+          timeZone: {{ settings.store_timezone | default: 'America/Bogota' | json }}
+        },
+        strings: {
+          added: {{ 'product.added' | t | json }},
+          adding: {{ 'product.adding' | t | json }},
+          soldOut: {{ 'product.sold_out' | t | json }},
+          unavailable: {{ 'product.unavailable' | t | json }},
+          error: {{ 'cart.error' | t | json }},
+          cartUpdated: {{ 'cart.updated' | t | json }}
+        }
+      };
+    </script>
+  </body>
+</html>

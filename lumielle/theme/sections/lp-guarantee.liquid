@@ -1,0 +1,53 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container container--narrow">
+    <div class="guarantee">
+      <div class="guarantee__seal" aria-hidden="true">
+        <span class="guarantee__days">{{ section.settings.days }}</span>
+        <span class="guarantee__unit">{{ section.settings.unit }}</span>
+      </div>
+      <div class="guarantee__body">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="h2 guarantee__title">{{ section.settings.heading }}</h2>
+        <div class="rte">{{ section.settings.text }}</div>
+        {%- if section.settings.link != blank and section.settings.link_label != blank -%}
+          <a class="link" href="{{ section.settings.link }}">{{ section.settings.link_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Garantía",
+  "tag": "div",
+  "class": "section-guarantee",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" },
+        { "value": "brand", "label": "Marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "days", "label": "Número del sello", "default": "30" },
+    { "type": "text", "id": "unit", "label": "Texto del sello", "default": "días" },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Compra sin riesgo" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Si no te encanta, te devolvemos tu dinero" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Pruébala hasta 30 días después de recibirla. Si no estás feliz con el resultado, escríbenos por WhatsApp con tu número de pedido y te devolvemos el 100 % de lo que pagaste por Nequi, Daviplata o transferencia. Sin letra pequeña.</p>"
+    },
+    { "type": "url", "id": "link", "label": "Enlace a la política" },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Ver política de garantía y devoluciones" }
+  ],
+  "presets": [{ "name": "Garantía" }]
+}
+{% endschema %}

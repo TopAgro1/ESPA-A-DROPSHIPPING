@@ -1,0 +1,111 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container container--narrow">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <div class="compare" role="table" aria-label="{{ section.settings.heading | strip_html | escape }}">
+      <div class="compare__row compare__row--head" role="row">
+        <span class="compare__label" role="columnheader"><span class="visually-hidden">{{ 'sections.comparison.feature' | t }}</span></span>
+        <span class="compare__us" role="columnheader">
+          {%- if section.settings.us_image != blank -%}
+            {{ section.settings.us_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', class: 'compare__thumb', widths: '80, 160' }}
+          {%- endif -%}
+          {{ section.settings.us_label }}
+        </span>
+        <span class="compare__them" role="columnheader">{{ section.settings.them_label }}</span>
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="compare__row" role="row" {{ block.shopify_attributes }}>
+          <span class="compare__label" role="rowheader">{{ block.settings.label }}</span>
+          <span class="compare__us" role="cell">
+            {%- case block.settings.us -%}
+              {%- when 'yes' -%}{% render 'icon', name: 'check-circle', size: 26, class: 'compare__yes' %}<span class="visually-hidden">{{ 'sections.comparison.yes' | t }}</span>
+              {%- when 'no' -%}{% render 'icon', name: 'x-circle', size: 26, class: 'compare__no' %}<span class="visually-hidden">{{ 'sections.comparison.no' | t }}</span>
+              {%- else -%}<strong>{{ block.settings.us_text }}</strong>
+            {%- endcase -%}
+          </span>
+          <span class="compare__them" role="cell">
+            {%- case block.settings.them -%}
+              {%- when 'yes' -%}{% render 'icon', name: 'check-circle', size: 26, class: 'compare__yes' %}<span class="visually-hidden">{{ 'sections.comparison.yes' | t }}</span>
+              {%- when 'no' -%}{% render 'icon', name: 'x-circle', size: 26, class: 'compare__no' %}<span class="visually-hidden">{{ 'sections.comparison.no' | t }}</span>
+              {%- else -%}{{ block.settings.them_text }}
+            {%- endcase -%}
+          </span>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}<p class="section-note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparativa",
+  "tag": "div",
+  "class": "section-comparison",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Haz la cuenta" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Una crema completa vs. armar la rutina por separado" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto" },
+    { "type": "image_picker", "id": "us_image", "label": "Miniatura de nuestro producto" },
+    { "type": "text", "id": "us_label", "label": "Columna nuestra", "default": "Crema Serum 10" },
+    { "type": "text", "id": "them_label", "label": "Columna de la alternativa", "default": "Productos por separado" },
+    { "type": "text", "id": "note", "label": "Nota al pie" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Fila",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Característica", "default": "Retinol, colágeno y ácido hialurónico juntos" },
+        {
+          "type": "select",
+          "id": "us",
+          "label": "Nosotros",
+          "options": [
+            { "value": "yes", "label": "Sí (✓)" },
+            { "value": "no", "label": "No (✗)" },
+            { "value": "text", "label": "Texto" }
+          ],
+          "default": "yes"
+        },
+        { "type": "text", "id": "us_text", "label": "Texto nosotros" },
+        {
+          "type": "select",
+          "id": "them",
+          "label": "Alternativa",
+          "options": [
+            { "value": "yes", "label": "Sí (✓)" },
+            { "value": "no", "label": "No (✗)" },
+            { "value": "text", "label": "Texto" }
+          ],
+          "default": "no"
+        },
+        { "type": "text", "id": "them_text", "label": "Texto alternativa" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparativa",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Retinol, colágeno y ácido hialurónico en una fórmula", "us": "yes", "them": "no" } },
+        { "type": "row", "settings": { "label": "Pasos en tu rutina", "us": "text", "us_text": "1", "them": "text", "them_text": "3 o más" } },
+        { "type": "row", "settings": { "label": "Contenido", "us": "text", "us_text": "110 ml", "them": "text", "them_text": "30 ml por frasco (típico)" } },
+        { "type": "row", "settings": { "label": "Para rostro y cuello", "us": "yes", "them": "text", "them_text": "Depende del producto" } },
+        { "type": "row", "settings": { "label": "Pagas al recibir y envío gratis", "us": "yes", "them": "text", "them_text": "Depende de la tienda" } },
+        { "type": "row", "settings": { "label": "Garantía de satisfacción de 30 días", "us": "yes", "them": "no" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

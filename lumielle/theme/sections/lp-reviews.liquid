@@ -1,0 +1,83 @@
+{%- comment -%}
+  Reseñas: solo reales. Agrega el bloque de tu app (Judge.me, Loox) o carga reseñas verificadas a mano.
+{%- endcomment -%}
+{%- liquid
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+  assign rating = product.metafields.reviews.rating.value.rating
+  assign rating_count = product.metafields.reviews.rating_count.value
+-%}
+<section class="section scheme-{{ section.settings.scheme }}" id="reviews" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    {%- if rating_count > 0 -%}
+      <div class="reviews__summary">{% render 'stars', rating: rating, count: rating_count %}</div>
+    {%- endif -%}
+    <div class="reviews">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="reviews__app">{% render block %}</div>
+          {%- when 'review' -%}
+            <figure class="review" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="review__media">{% render 'responsive-image', image: block.settings.image, sizes: '(min-width: 990px) 25vw, 80vw', max_width: 800 %}</div>
+              {%- endif -%}
+              {% render 'stars', rating: block.settings.rating %}
+              <blockquote class="review__text">{{ block.settings.text }}</blockquote>
+              <figcaption class="review__author">
+                <strong>{{ block.settings.author }}</strong>{% if block.settings.location != blank %} · {{ block.settings.location }}{% endif %}
+                {%- if block.settings.verified -%}<span class="review__verified">{% render 'icon', name: 'check', size: 14 %} {{ 'sections.reviews.verified' | t }}</span>{%- endif -%}
+              </figcaption>
+            </figure>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reseñas",
+  "tag": "div",
+  "class": "section-reviews",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Publica solo reseñas reales de clientas. Inventarlas, comprarlas o copiarlas de otras tiendas es ilegal y Meta puede bloquear tus anuncios."
+    },
+    { "type": "product", "id": "product", "label": "Producto (solo inicio)" },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Opiniones" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Lo que dicen nuestras clientas" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "review",
+      "name": "Reseña real",
+      "settings": [
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Estrellas", "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Reseña (texto literal)" },
+        { "type": "text", "id": "author", "label": "Nombre (con su permiso)" },
+        { "type": "text", "id": "location", "label": "Ciudad" },
+        { "type": "image_picker", "id": "image", "label": "Foto de la clienta (con permiso)" },
+        { "type": "checkbox", "id": "verified", "label": "Compra verificada (solo si lo comprobaste)", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Reseñas" }]
+}
+{% endschema %}

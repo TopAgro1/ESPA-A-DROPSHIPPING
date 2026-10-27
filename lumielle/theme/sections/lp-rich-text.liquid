@@ -1,0 +1,50 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container container--narrow">
+    <div class="rich-text rich-text--{{ section.settings.align }}">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.link != blank -%}
+        <a class="btn btn--brand" href="{{ section.settings.link }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Texto",
+  "tag": "div",
+  "class": "section-rich-text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" },
+        { "value": "brand", "label": "Marca" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alineación",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "center"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Sobre Lumielle" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Cuenta aquí la historia real de tu tienda: quién está detrás, por qué elegiste estos productos y cómo atiendes a tus clientas.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón" },
+    { "type": "url", "id": "link", "label": "Enlace del botón" }
+  ],
+  "presets": [{ "name": "Texto" }]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+{
+  "_nota": "Payload para crear el producto con el conector de Shopify (create-product) en la tienda Lumielle, como BORRADOR. Las imágenes se suben aparte (Shopify exige URLs públicas): ver producto.md.",
+  "title": "Crema Facial Serum 10 – Retinol, Colágeno y Hialurónico",
+  "vendor": "Serum 10",
+  "productType": "Crema facial",
+  "status": "DRAFT",
+  "tags": [
+    "antiedad",
+    "retinol",
+    "colageno",
+    "acido-hialuronico",
+    "crema-facial",
+    "skincare"
+  ],
+  "descriptionHtml": "<p><strong>Tu rutina antiedad completa en una sola crema.</strong> La Crema Facial Serum 10 combina retinol, colágeno y ácido hialurónico en una fórmula para rostro y cuello: aporta hidratación profunda y suavidad, suaviza visiblemente los signos del envejecimiento y contribuye a mejorar el aspecto de firmeza de la piel.</p>\n<ul>\n  <li><strong>Ácido hialurónico:</strong> hidrata en profundidad y deja la piel suave.</li>\n  <li><strong>Retinol:</strong> suaviza visiblemente las líneas finas y mejora la textura con el uso constante.</li>\n  <li><strong>Colágeno:</strong> ayuda a retener la hidratación y contribuye a mejorar el aspecto de firmeza.</li>\n</ul>\n<p><strong>Modo de uso:</strong> aplica en la noche sobre rostro y cuello limpios, con movimientos ascendentes, evitando el contorno de ojos. Si es tu primera vez con retinol, haz una prueba 24 horas antes y empieza 3 noches por semana. De día, usa protector solar. Si estás embarazada o lactando, consulta con tu médico antes de usarla.</p>\n<p>Contenido: 110 ml. Lista completa de ingredientes (INCI) en el empaque. NSO INVIMA: [número que te dé el proveedor]. Los resultados pueden variar según cada piel.</p>",
+  "options": [
+    "Cantidad"
+  ],
+  "variants": [
+    {
+      "optionValues": [
+        {
+          "optionName": "Cantidad",
+          "name": "1 unidad"
+        }
+      ],
+      "price": "79900",
+      "sku": "SERUM10-CF110-X1"
+    },
+    {
+      "optionValues": [
+        {
+          "optionName": "Cantidad",
+          "name": "2 unidades"
+        }
+      ],
+      "price": "119900",
+      "sku": "SERUM10-CF110-X2"
+    },
+    {
+      "optionValues": [
+        {
+          "optionName": "Cantidad",
+          "name": "3 unidades"
+        }
+      ],
+      "price": "159900",
+      "sku": "SERUM10-CF110-X3"
+    }
+  ],
+  "seo": {
+    "title": "Crema Facial Serum 10 con Retinol y Colágeno | Lumielle",
+    "description": "Crema facial con retinol, colágeno y ácido hialurónico para rostro y cuello. 110 ml. Envío gratis a toda Colombia y pago contra entrega."
+  },
+  "handle": "crema-facial-serum-10",
+  "costPerItem": {
+    "1 unidad": 16970,
+    "2 unidades": 33940,
+    "3 unidades": 50910
+  }
+}

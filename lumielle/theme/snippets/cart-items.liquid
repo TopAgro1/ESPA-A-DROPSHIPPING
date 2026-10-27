@@ -1,0 +1,37 @@
+{%- comment -%}
+  Líneas del carrito (carrito lateral y página del carrito). Cantidades con data-line para /cart/change.js.
+{%- endcomment -%}
+<ul class="cart-items" role="list">
+  {%- for item in cart.items -%}
+    <li class="cart-item" data-line="{{ forloop.index }}">
+      <a class="cart-item__media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+        {%- if item.image -%}
+          {{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '', widths: '90, 180' }}
+        {%- endif -%}
+      </a>
+      <div class="cart-item__info">
+        <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>
+        {%- unless item.product.has_only_default_variant -%}
+          <p class="cart-item__variant">{{ item.variant.title | escape }}</p>
+        {%- endunless -%}
+        {%- for discount in item.line_level_discount_allocations -%}
+          <p class="cart-item__discount">{% render 'icon', name: 'gift', size: 14 %} {{ discount.discount_application.title | escape }}</p>
+        {%- endfor -%}
+        <div class="cart-item__row">
+          <div class="qty qty--sm">
+            <button type="button" class="qty__btn" data-cart-qty="{{ item.quantity | minus: 1 }}" aria-label="{{ 'product.decrease' | t }}">{% render 'icon', name: 'minus', size: 16 %}</button>
+            <span class="qty__value" aria-label="{{ 'product.quantity' | t }}">{{ item.quantity }}</span>
+            <button type="button" class="qty__btn" data-cart-qty="{{ item.quantity | plus: 1 }}" aria-label="{{ 'product.increase' | t }}">{% render 'icon', name: 'plus', size: 16 %}</button>
+          </div>
+          <div class="cart-item__price">
+            {%- if item.original_line_price > item.final_line_price -%}
+              <s>{{ item.original_line_price | money_without_trailing_zeros }}</s>
+            {%- endif -%}
+            <strong>{{ item.final_line_price | money_without_trailing_zeros }}</strong>
+          </div>
+        </div>
+        <button type="button" class="cart-item__remove link" data-cart-qty="0">{{ 'cart.remove' | t }}</button>
+      </div>
+    </li>
+  {%- endfor -%}
+</ul>

@@ -4,13 +4,14 @@
 #
 # Uso: bash scripts/build-zip.sh            → dist/dermarel-pdp-v<versión>.zip
 #      SKIP_CHECKS=1 bash scripts/build-zip.sh  (sin validar)
+#      THEME_DIR=lumielle/theme THEME_NAME=lumielle-theme bash scripts/build-zip.sh  (otro tema del repo)
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-THEME="$ROOT/theme"
+THEME="$ROOT/${THEME_DIR:-theme}"
 DIST="$ROOT/dist"
 VERSION="$(python3 -c "import json;print(next(g for g in json.load(open('$THEME/config/settings_schema.json')) if g['name']=='theme_info')['theme_version'])")"
-OUT="$DIST/dermarel-pdp-v$VERSION.zip"
+OUT="$DIST/${THEME_NAME:-dermarel-pdp}-v$VERSION.zip"
 
 if [[ "${SKIP_CHECKS:-0}" != "1" ]]; then
   if [[ -d "$ROOT/tools/node_modules" ]]; then

@@ -1,0 +1,31 @@
+{%- comment -%}
+  Estrellas de valoración (solo con datos reales: metacampos de la app de reseñas).
+  Uso: {% render 'stars', rating: 4.8, count: 132, link: '#reviews' %}
+{%- endcomment -%}
+{%- liquid
+  assign r = rating | default: 0 | times: 1.0
+  assign full = r | floor
+  assign rest = r | minus: full
+  assign half_index = full | plus: 1
+-%}
+<div class="stars {{ class }}">
+  <span class="stars__icons" aria-hidden="true">
+    {%- for i in (1..5) -%}
+      {%- if i <= full -%}
+        {% render 'icon', name: 'star', size: 18, class: 'star star--on' %}
+      {%- elsif i == half_index and rest >= 0.25 -%}
+        {% render 'icon', name: 'star-half', size: 18, class: 'star star--on' %}
+      {%- else -%}
+        {% render 'icon', name: 'star', size: 18, class: 'star star--off' %}
+      {%- endif -%}
+    {%- endfor -%}
+  </span>
+  <span class="visually-hidden">{{ 'product.rating_label' | t: rating: r }}</span>
+  {%- if count > 0 -%}
+    {%- if link != blank -%}
+      <a class="stars__count" href="{{ link }}">{{ r | round: 1 }} · {{ 'product.reviews_count' | t: count: count }}</a>
+    {%- else -%}
+      <span class="stars__count">{{ r | round: 1 }} · {{ 'product.reviews_count' | t: count: count }}</span>
+    {%- endif -%}
+  {%- endif -%}
+</div>

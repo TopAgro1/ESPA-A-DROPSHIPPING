@@ -1,0 +1,28 @@
+{%- comment -%}
+  Tarjeta de producto para colecciones, búsqueda y "Completa tu rutina".
+  Uso: {% render 'product-card', card_product: product %}
+{%- endcomment -%}
+{%- liquid
+  assign rating = card_product.metafields.reviews.rating.value.rating
+  assign rating_count = card_product.metafields.reviews.rating_count.value
+-%}
+<article class="card">
+  <a class="card__media" href="{{ card_product.url }}" tabindex="-1" aria-hidden="true">
+    {%- if card_product.featured_media -%}
+      {%- assign card_alt = card_product.featured_media.alt | default: card_product.title | escape -%}
+      {{ card_product.featured_media | image_url: width: 720 | image_tag: widths: '240, 360, 540, 720', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: card_alt, class: 'card__img' }}
+      {%- if card_product.media[1] and card_product.media[1].media_type == 'image' -%}
+        {{ card_product.media[1] | image_url: width: 720 | image_tag: widths: '240, 360, 540, 720', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: '', class: 'card__img card__img--hover' }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div class="card__body">
+    {%- if rating_count > 0 -%}
+      {% render 'stars', rating: rating, count: rating_count %}
+    {%- endif -%}
+    <h3 class="card__title"><a href="{{ card_product.url }}">{{ card_product.title | escape }}</a></h3>
+    {% render 'price', product: card_product %}
+  </div>
+</article>

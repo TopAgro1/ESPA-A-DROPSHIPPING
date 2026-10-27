@@ -1,0 +1,47 @@
+{%- comment -%}
+  Tokens del tema: fuentes del Shopify Font Library y variables CSS que salen de Configuración del tema.
+{%- endcomment -%}
+{%- liquid
+  assign body_font = settings.type_body_font
+  assign body_font_semibold = body_font | font_modify: 'weight', '600'
+  assign body_font_bold = body_font | font_modify: 'weight', 'bold'
+  assign heading_font = settings.type_heading_font
+  assign heading_scale = settings.heading_scale | divided_by: 100.0
+-%}
+{{ body_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+{{ heading_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: true }}
+<style>
+  {{ body_font | font_face: font_display: 'swap' }}
+  {%- if body_font_semibold %}{{ body_font_semibold | font_face: font_display: 'swap' }}{% endif %}
+  {%- if body_font_bold %}{{ body_font_bold | font_face: font_display: 'swap' }}{% endif %}
+  {{ heading_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+    --font-body-weight: {{ body_font.weight }};
+    --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+    --font-heading-weight: {{ heading_font.weight }};
+    --heading-scale: {{ heading_scale }};
+    --body-size: {{ settings.body_size }}px;
+
+    --c-brand: {{ settings.color_brand }};
+    --c-brand-rgb: {{ settings.color_brand.red }}, {{ settings.color_brand.green }}, {{ settings.color_brand.blue }};
+    --c-tint: {{ settings.color_tint }};
+    --c-cta: {{ settings.color_cta }};
+    --c-cta-rgb: {{ settings.color_cta.red }}, {{ settings.color_cta.green }}, {{ settings.color_cta.blue }};
+    --c-cta-text: {{ settings.color_cta_text }};
+    --c-ink: {{ settings.color_ink }};
+    --c-ink-rgb: {{ settings.color_ink.red }}, {{ settings.color_ink.green }}, {{ settings.color_ink.blue }};
+    --c-text: {{ settings.color_text }};
+    --c-muted: {{ settings.color_muted }};
+    --c-bg: {{ settings.color_bg }};
+    --c-bg-alt: {{ settings.color_bg_alt }};
+    --c-border: {{ settings.color_border }};
+    --c-success: {{ settings.color_success }};
+    --c-star: {{ settings.color_star }};
+
+    --r-btn: {{ settings.button_radius }}px;
+    --r-card: {{ settings.card_radius }}px;
+    --logo-width: {{ settings.logo_width }}px;
+  }
+</style>

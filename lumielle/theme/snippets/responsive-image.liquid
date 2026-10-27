@@ -1,0 +1,20 @@
+{%- comment -%}
+  Imagen responsive con ancho y alto definidos (evita saltos de diseño).
+  Uso: {% render 'responsive-image', image: img, sizes: '(min-width: 990px) 50vw, 100vw', eager: true, class: '' %}
+{%- endcomment -%}
+{%- liquid
+  assign alt_text = alt | default: image.alt | escape
+  assign w = max_width | default: 2048
+  if image.width < w
+    assign w = image.width
+  endif
+-%}
+{%- if image != blank -%}
+  {%- if eager -%}
+    {{ image | image_url: width: w | image_tag: widths: '360, 540, 720, 900, 1080, 1296, 1600, 2048', sizes: sizes, loading: 'eager', fetchpriority: 'high', preload: preload, alt: alt_text, class: class }}
+  {%- else -%}
+    {{ image | image_url: width: w | image_tag: widths: '360, 540, 720, 900, 1080, 1296, 1600, 2048', sizes: sizes, loading: 'lazy', alt: alt_text, class: class }}
+  {%- endif -%}
+{%- else -%}
+  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

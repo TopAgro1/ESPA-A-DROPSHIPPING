@@ -1,0 +1,323 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Lumielle",
+    "theme_version": "1.0.0",
+    "theme_author": "Lumielle",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Marca",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "Opcional. Sin imagen se muestra el logotipo Lumielle incluido en el tema."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 240,
+        "step": 4,
+        "unit": "px",
+        "label": "Ancho del logo",
+        "default": 128
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Cuadrado, 512 × 512 px. Usa lumielle-favicon-512.png."
+      }
+    ]
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      { "type": "header", "content": "Marca" },
+      { "type": "color", "id": "color_brand", "label": "Color de marca", "default": "#1F4FA3" },
+      { "type": "color", "id": "color_tint", "label": "Tinte de marca (fondos suaves)", "default": "#E6EEFA" },
+      { "type": "header", "content": "Botón de compra" },
+      {
+        "type": "color",
+        "id": "color_cta",
+        "label": "Fondo del botón de compra",
+        "info": "Usa este color solo para el botón de compra: el contraste con todo lo demás es lo que lo hace visible.",
+        "default": "#D63F27"
+      },
+      { "type": "color", "id": "color_cta_text", "label": "Texto del botón de compra", "default": "#FFFFFF" },
+      { "type": "header", "content": "Textos y fondos" },
+      { "type": "color", "id": "color_ink", "label": "Titulares", "default": "#14213D" },
+      { "type": "color", "id": "color_text", "label": "Texto", "default": "#2B3445" },
+      { "type": "color", "id": "color_muted", "label": "Texto secundario", "default": "#5B6577" },
+      { "type": "color", "id": "color_bg", "label": "Fondo", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_bg_alt", "label": "Fondo alterno", "default": "#F4F7FB" },
+      { "type": "color", "id": "color_border", "label": "Bordes", "default": "#DCE3EE" },
+      { "type": "header", "content": "Estados" },
+      { "type": "color", "id": "color_success", "label": "Éxito y ahorro", "default": "#1E7A4C" },
+      { "type": "color", "id": "color_star", "label": "Estrellas", "default": "#F2A93B" }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "label": "Titulares",
+        "default": "inter_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Textos",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 85,
+        "max": 120,
+        "step": 5,
+        "unit": "%",
+        "label": "Tamaño de titulares",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "body_size",
+        "min": 15,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "label": "Tamaño del texto",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Botones y animaciones",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_radius",
+        "min": 0,
+        "max": 30,
+        "step": 2,
+        "unit": "px",
+        "label": "Redondeo de botones",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "card_radius",
+        "min": 0,
+        "max": 28,
+        "step": 2,
+        "unit": "px",
+        "label": "Redondeo de tarjetas e imágenes",
+        "default": 16
+      },
+      {
+        "type": "checkbox",
+        "id": "cta_pulse",
+        "label": "Pulso suave en el botón de compra",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "reveal_on_scroll",
+        "label": "Aparición suave de secciones al hacer scroll",
+        "info": "Nunca se aplica a la primera pantalla. Se desactiva solo si el visitante pidió reducir movimiento.",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Venta y cobro",
+    "settings": [
+      {
+        "type": "select",
+        "id": "payment_mode",
+        "label": "Cómo cobra la tienda",
+        "options": [
+          { "value": "cod", "label": "Contra entrega (paga al recibir)" },
+          { "value": "card", "label": "Pago en línea (tarjeta, PSE…)" }
+        ],
+        "default": "cod"
+      },
+      {
+        "type": "text",
+        "id": "cod_button_label",
+        "label": "Botón en contra entrega",
+        "default": "Pedir ahora – Paga al recibir"
+      },
+      {
+        "type": "text",
+        "id": "card_button_label",
+        "label": "Botón en pago en línea",
+        "default": "Comprar ahora"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_native_buttons",
+        "label": "Ocultar los botones del tema",
+        "info": "Actívalo solo si agregaste en la ficha el botón de tu app de formulario contra entrega (Releasit, EasySell).",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_dynamic_checkout",
+        "label": "Mostrar botón de pago rápido (Shop Pay, etc.)",
+        "info": "Solo en pago en línea.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Envíos y entrega",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "free_shipping_always",
+        "label": "Envío gratis en todos los pedidos",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Envío gratis desde (monto)",
+        "info": "Solo si el envío no es siempre gratis. Monto en la moneda de la tienda, sin puntos. 0 = ocultar la barra.",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "delivery_min_days",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "label": "Entrega: días hábiles mínimos",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "delivery_max_days",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "label": "Entrega: días hábiles máximos",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "cutoff_hour",
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "label": "Hora de corte de despacho",
+        "info": "Pedidos después de esta hora se despachan el siguiente día hábil (hora de Colombia).",
+        "default": 14
+      },
+      {
+        "type": "checkbox",
+        "id": "saturday_business_day",
+        "label": "Contar los sábados como día hábil",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "holidays",
+        "label": "Festivos (sin entregas)",
+        "info": "Fechas AAAA-MM-DD separadas por coma. Vienen cargados los festivos de Colombia de nov. 2026 a 2027.",
+        "default": "2026-11-02, 2026-11-16, 2026-12-08, 2026-12-25, 2027-01-01, 2027-01-11, 2027-03-22, 2027-03-25, 2027-03-26, 2027-05-01, 2027-05-10, 2027-05-31, 2027-06-07, 2027-07-05, 2027-07-20, 2027-08-07, 2027-08-16, 2027-10-18, 2027-11-01, 2027-11-15, 2027-12-08, 2027-12-25"
+      },
+      {
+        "type": "text",
+        "id": "date_locale",
+        "label": "Formato de fechas",
+        "info": "Código de idioma y país, por ejemplo es-CO, es-MX o en-US.",
+        "default": "es-CO"
+      },
+      {
+        "type": "text",
+        "id": "store_timezone",
+        "label": "Zona horaria",
+        "default": "America/Bogota"
+      }
+    ]
+  },
+  {
+    "name": "WhatsApp y contacto",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Con indicativo y sin espacios ni +, por ejemplo 573001234567. Vacío = sin botón flotante."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_message",
+        "label": "Mensaje inicial",
+        "default": "Hola, tengo una pregunta sobre la crema Serum 10"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "Texto accesible del botón",
+        "default": "Escríbenos por WhatsApp"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email de atención",
+        "info": "Idealmente con tu dominio (hola@tudominio.com)."
+      }
+    ]
+  },
+  {
+    "name": "Carrito",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Al agregar al carrito",
+        "options": [
+          { "value": "drawer", "label": "Abrir carrito lateral" },
+          { "value": "page", "label": "Ir a la página del carrito" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "product",
+        "id": "cart_upsell_product",
+        "label": "Producto sugerido en el carrito",
+        "info": "Un solo producto complementario. Vacío = sin sugerencia."
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Título de la sugerencia",
+        "default": "Completa tu rutina"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_text",
+        "label": "Texto bajo el botón de pago",
+        "default": "Envío gratis · Garantía de 30 días"
+      }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      { "type": "text", "id": "social_instagram", "label": "Instagram (URL)" },
+      { "type": "text", "id": "social_facebook", "label": "Facebook (URL)" },
+      { "type": "text", "id": "social_tiktok", "label": "TikTok (URL)" },
+      { "type": "text", "id": "social_youtube", "label": "YouTube (URL)" }
+    ]
+  }
+]

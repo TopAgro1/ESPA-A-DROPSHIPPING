@@ -1,0 +1,88 @@
+<section class="section scheme-{{ section.settings.scheme }}" data-reveal>
+  <div class="container">
+    {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text %}
+    <ul class="benefits benefits--{{ section.blocks.size }}" role="list">
+      {%- for block in section.blocks -%}
+        <li class="benefit" {{ block.shopify_attributes }}>
+          <span class="benefit__icon">{% render 'icon', name: block.settings.icon, size: 28 %}</span>
+          <h3 class="benefit__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}<p class="benefit__text">{{ block.settings.text }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.show_cta -%}
+      <div class="section-cta">
+        <a class="btn btn--cta btn--lg" href="#BuyBox" data-scroll-buybox>{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Beneficios",
+  "tag": "div",
+  "class": "section-benefits",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Fondo",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "alt", "label": "Alterno" },
+        { "value": "tint", "label": "Tinte de marca" }
+      ],
+      "default": "tint"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Antetítulo", "default": "Lo que vas a notar" },
+    { "type": "inline_richtext", "id": "heading", "label": "Título", "default": "Una crema, todo lo que tu piel te está pidiendo" },
+    { "type": "inline_richtext", "id": "text", "label": "Texto" },
+    { "type": "checkbox", "id": "show_cta", "label": "Mostrar botón", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Quiero mi crema" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            { "value": "drop", "label": "Gota" },
+            { "value": "droplets", "label": "Gotas" },
+            { "value": "feather", "label": "Pluma (suavidad)" },
+            { "value": "firm", "label": "Firmeza" },
+            { "value": "face", "label": "Rostro" },
+            { "value": "layers", "label": "Capas" },
+            { "value": "tube", "label": "Tubo" },
+            { "value": "moon", "label": "Luna" },
+            { "value": "sparkle", "label": "Destello" },
+            { "value": "leaf", "label": "Hoja" },
+            { "value": "heart", "label": "Corazón" },
+            { "value": "clock", "label": "Reloj" }
+          ],
+          "default": "drop"
+        },
+        { "type": "text", "id": "title", "label": "Título", "default": "Hidratación profunda" },
+        { "type": "textarea", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Beneficios",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "drop", "title": "Hidratación profunda", "text": "Tu piel se siente cómoda y nutrida todo el día." } },
+        { "type": "benefit", "settings": { "icon": "feather", "title": "Suavidad desde la primera vez", "text": "Textura en crema que se absorbe sin dejar sensación grasosa." } },
+        { "type": "benefit", "settings": { "icon": "sparkle", "title": "Signos de la edad más suaves", "text": "Con el uso constante, las líneas finas se ven visiblemente más suaves." } },
+        { "type": "benefit", "settings": { "icon": "firm", "title": "Aspecto más firme", "text": "Contribuye a mejorar el aspecto de firmeza en rostro y cuello." } },
+        { "type": "benefit", "settings": { "icon": "layers", "title": "1 paso en vez de 3", "text": "Retinol, colágeno y ácido hialurónico en la misma fórmula." } },
+        { "type": "benefit", "settings": { "icon": "tube", "title": "110 ml que rinden", "text": "Casi 4 veces el contenido de un sérum típico de 30 ml." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

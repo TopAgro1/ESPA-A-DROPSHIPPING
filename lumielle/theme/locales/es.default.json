@@ -1,0 +1,90 @@
+{
+  "general": {
+    "page": "Página {{ page }}",
+    "menu": "Menú",
+    "search": "Buscar",
+    "close": "Cerrar",
+    "pagination": "Paginación",
+    "404_title": "No encontramos esta página",
+    "404_text": "Puede que el enlace haya cambiado. Te llevamos de vuelta al inicio.",
+    "back_home": "Volver al inicio"
+  },
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido"
+  },
+  "product": {
+    "added": "✓ Agregado",
+    "adding": "Agregando…",
+    "sold_out": "Agotado",
+    "unavailable": "No disponible",
+    "from_price": "Desde {{ price }}",
+    "regular_price": "Precio habitual",
+    "rating_label": "Valoración de {{ rating }} sobre 5",
+    "reviews_count": {
+      "one": "{{ count }} reseña",
+      "other": "{{ count }} reseñas"
+    },
+    "gallery": "Galería de imágenes del producto",
+    "previous": "Imagen anterior",
+    "next": "Imagen siguiente",
+    "show_media": "Ver imagen {{ index }}",
+    "reference_price": "Precio comprando por unidad",
+    "savings_short": "Ahorras",
+    "per_unit": "Te queda en",
+    "each": "c/u",
+    "quantity": "Cantidad",
+    "decrease": "Restar uno",
+    "increase": "Sumar uno",
+    "low_stock": {
+      "one": "¡Solo queda {{ count }} unidad!",
+      "other": "¡Solo quedan {{ count }} unidades!"
+    }
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "error": "No pudimos actualizar tu carrito. Inténtalo de nuevo.",
+    "updated": "Carrito actualizado",
+    "remove": "Quitar",
+    "empty": "Tu carrito está vacío.",
+    "continue": "Ver productos",
+    "add_upsell": "Agregar",
+    "subtotal": "Total",
+    "checkout": "Finalizar pedido",
+    "free_shipping_always": "Tu envío es GRATIS a toda Colombia",
+    "free_shipping_remaining_html": "Te faltan <strong>{{ amount }}</strong> para el envío gratis",
+    "free_shipping_unlocked": "¡Desbloqueaste el envío gratis!"
+  },
+  "sections": {
+    "comparison": {
+      "feature": "Característica",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "reviews": {
+      "verified": "Compra verificada"
+    }
+  },
+  "collections": {
+    "empty": "Todavía no hay productos en esta colección.",
+    "all_title": "Colecciones"
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "¿Qué estás buscando?",
+    "submit": "Buscar",
+    "results_count": {
+      "one": "{{ count }} resultado para “{{ terms }}”",
+      "other": "{{ count }} resultados para “{{ terms }}”"
+    }
+  },
+  "password": {
+    "title": "Muy pronto",
+    "label": "Contraseña",
+    "submit": "Entrar"
+  },
+  "gift_card": {
+    "title": "Tu tarjeta de regalo",
+    "expired": "Esta tarjeta de regalo ya no está activa.",
+    "shop": "Ir a la tienda"
+  }
+}

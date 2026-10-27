@@ -1,0 +1,12 @@
+{%- comment -%}
+  Encabezado de sección: antetítulo + título + texto.
+  Uso: {% render 'section-heading', eyebrow: section.settings.eyebrow, heading: section.settings.heading, text: section.settings.text, tag: 'h2', align: 'center' %}
+{%- endcomment -%}
+{%- assign heading_tag = tag | default: 'h2' -%}
+{%- if eyebrow != blank or heading != blank or text != blank -%}
+  <header class="section-heading section-heading--{{ align | default: 'center' }}">
+    {%- if eyebrow != blank -%}<p class="eyebrow">{{ eyebrow }}</p>{%- endif -%}
+    {%- if heading != blank -%}<{{ heading_tag }} class="section-heading__title h2">{{ heading }}</{{ heading_tag }}>{%- endif -%}
+    {%- if text != blank -%}<p class="section-heading__text">{{ text }}</p>{%- endif -%}
+  </header>
+{%- endif -%}

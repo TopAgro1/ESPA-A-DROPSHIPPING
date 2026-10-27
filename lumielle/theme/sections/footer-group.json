@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Pie de página",
+  "sections": {
+    "footer": {
+      "type": "lp-footer",
+      "blocks": {
+        "menu": { "type": "menu", "settings": { "heading": "Tienda", "menu": "footer" } },
+        "policies": { "type": "policies", "settings": { "heading": "Legal" } },
+        "contact": { "type": "contact", "settings": { "heading": "Atención", "hours": "Lunes a sábado, 8:00 a. m. – 6:00 p. m." } }
+      },
+      "block_order": ["menu", "policies", "contact"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

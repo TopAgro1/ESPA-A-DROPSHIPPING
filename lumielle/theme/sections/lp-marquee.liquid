@@ -1,0 +1,49 @@
+<div class="marquee scheme-{{ section.settings.scheme }}" style="--marquee-duration: {{ section.settings.duration }}s">
+  <div class="marquee__track">
+    {%- for n in (1..2) -%}
+      <ul class="marquee__group" role="list"{% if n == 2 %} aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          <li class="marquee__item" {{ block.shopify_attributes }}>{% render 'icon', name: 'sparkle', size: 14, class: 'marquee__sep' %}<span>{{ block.settings.text }}</span></li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cinta de beneficios",
+  "tag": "section",
+  "class": "section-marquee",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Colores",
+      "options": [
+        { "value": "brand", "label": "Marca" },
+        { "value": "ink", "label": "Oscuro" },
+        { "value": "tint", "label": "Tinte suave" }
+      ],
+      "default": "ink"
+    },
+    { "type": "range", "id": "duration", "min": 15, "max": 60, "step": 5, "unit": "s", "label": "Duración de un ciclo", "default": 35 }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Texto", "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Hidratación profunda" }] }
+  ],
+  "presets": [
+    {
+      "name": "Cinta de beneficios",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Hidratación profunda" } },
+        { "type": "item", "settings": { "text": "Retinol" } },
+        { "type": "item", "settings": { "text": "Colágeno" } },
+        { "type": "item", "settings": { "text": "Ácido hialurónico" } },
+        { "type": "item", "settings": { "text": "Envío gratis" } },
+        { "type": "item", "settings": { "text": "Paga al recibir" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Precio de un producto o variante. Tachado solo si hay "precio de comparación" real en Shopify.
+  Uso: {% render 'price', product: product %} · {% render 'price', variant: variant, class: 'price--lg' %}
+{%- endcomment -%}
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign price = target.price
+  assign compare = target.compare_at_price
+  if product and product.price_varies and variant == blank
+    assign show_from = true
+    assign price = product.price_min
+  endif
+-%}
+<div class="price {{ class }}">
+  <span class="price__current">
+    {%- assign formatted = price | money_without_trailing_zeros -%}
+    {%- if show_from -%}{{ 'product.from_price' | t: price: formatted }}{%- else -%}{{ formatted }}{%- endif -%}
+  </span>
+  {%- if compare > price and show_from != true -%}
+    <s class="price__compare"><span class="visually-hidden">{{ 'product.regular_price' | t }}</span> {{ compare | money_without_trailing_zeros }}</s>
+  {%- endif -%}
+</div>

@@ -1,5 +1,7 @@
 # Dermarel PDP — tema de Shopify para testear productos
 
+> **Nuevo:** tienda **Lumielle** para Colombia (Crema Facial Serum 10, contra entrega): tema propio, imágenes, estrategia y checklist en [`lumielle/`](lumielle/README.md). Tema listo para subir: `dist/lumielle-theme-v1.0.0.zip`.
+
 Tema de Shopify (Online Store 2.0) que reproduce el diseño de página de producto de alta conversión **Dermarel** y lo deja listo como plantilla reutilizable: cada vez que quieras testear un producto, solo cambias fotos y textos desde el editor.
 
 - **Auditoría completa del diseño:** [`docs/AUDITORIA-PDP.md`](docs/AUDITORIA-PDP.md)
